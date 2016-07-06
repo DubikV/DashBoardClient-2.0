@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:background="#eeeeee"
+            android:stretchColumns="*"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Показники травень 2016"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Відхилення [від 12Q]"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Відхилення [від 3Q]"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </TableRow>
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2012-11-22"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="397"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="19039.21"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="19039.21"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="19039.21"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+            </TableRow>
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2012-11-23"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="348"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="16759.28"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="16759.28"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="16759.28"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+            </TableRow>
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2012-11-24"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="305"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:background="#eeeeee"
+            android:stretchColumns="*"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Показники травень 2016"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Відхилення [від 12Q]"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Відхилення [від 3Q]"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </TableRow>
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2012-11-22"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="397"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="19039.21"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="19039.21"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="19039.21"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+            </TableRow>
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2012-11-23"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="348"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="16759.28"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="16759.28"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="16759.28"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+            </TableRow>
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2012-11-24"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="305"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+            </TableRow>
+            <TableRow android:padding="5dp">
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2012-11-24"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="305"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14527.19"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</LinearLayout>

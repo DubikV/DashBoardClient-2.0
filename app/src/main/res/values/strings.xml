@@ -1,0 +1,41 @@
+<resources>
+
+    <string name="app_name">Dash Board</string>
+    // info develop
+    <string name="dev_info_mail">i.dubyk@avatlantik.com.ua</string>
+    <string name="dev_info">Dubik V.</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_settings_ua">Налаштування</string>
+    <string name="nav_salesUgk_ua">Продажі УГК</string>
+    <string name="nav_salesUgk">Sales UGK</string>
+    <string name="nav_salesMoney_ua">Продажі грн.</string>
+    <string name="nav_salesMoney">Sales Money</string>
+    <string name="nav_margin_ua">Маржа</string>
+    <string name="nav_margin">Margin</string>
+    <string name="nav_stocks_ua">Запаси</string>
+    <string name="nav_stocks">Stocks</string>
+    <string name="nav_communicate_ua">Зєднання</string>
+    <string name="nav_communicate">Communicate</string>
+    <string name="nav_loaddata_ua">Виконати загрузку</string>
+    <string name="nav_loaddata">Load data</string>
+    <string name="nav_service_ua">Сервіс</string>
+    <string name="nav_service">Service</string>
+    <string name="nav_info_ua">Інформация</string>
+    <string name="nav_info">Info</string>
+    <string name="nav_exit_ua">Вихід</string>
+    <string name="nav_exit">Exit</string>
+
+    <string name="section_format">Привет из Серкции : %1$d</string>
+
+    <string name="textView_numbers_down1">ПФ норм. max</string>
+    <string name="textView_numbers_up1">ПФ 12Q</string>
+    <string name="_100">100%</string>
+    <string name="_88">88</string>
+
+    <string name="custom_lang_orientation">1</string>
+
+</resources>
