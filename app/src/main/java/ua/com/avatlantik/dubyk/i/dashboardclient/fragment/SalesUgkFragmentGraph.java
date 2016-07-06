@@ -3,7 +3,6 @@ package ua.com.avatlantik.dubyk.i.dashboardclient.fragment;
 import android.animation.ValueAnimator;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,17 +11,30 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.Chart;
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.BubbleData;
+import com.github.mikephil.charting.data.BubbleDataSet;
+import com.github.mikephil.charting.data.BubbleEntry;
+import com.github.mikephil.charting.data.CandleData;
+import com.github.mikephil.charting.data.CandleDataSet;
+import com.github.mikephil.charting.data.CandleEntry;
+import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.Legend;
-import com.github.mikephil.charting.utils.XLabels;
-import com.github.mikephil.charting.utils.YLabels;
+import com.github.mikephil.charting.data.ScatterData;
+import com.github.mikephil.charting.data.ScatterDataSet;
+import com.github.mikephil.charting.formatter.AxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -33,9 +45,10 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.R;
  * Created by i.dubyk on 24.06.2016.
  */
 public class SalesUgkFragmentGraph extends Fragment{
-    private static  final int LAYOUT = R.layout.fragment_sales_ugk_graph;
+    private static  final int LAYOUT = R.layout.fragment_sales_graph;
     private View view;
-    private LineChart mChart;
+    private CombinedChart mChart;
+    private final int itemcount = 12;
 
     public static SalesUgkFragmentGraph getInstance() {
 
@@ -51,14 +64,16 @@ public class SalesUgkFragmentGraph extends Fragment{
         view = inflater.inflate(LAYOUT, container, false);
 
         int orientationView = getResources().getConfiguration().orientation;
-
-        setGraphIntroTheView(orientationView);
-
-        setPozitionsLinearLayoutForOrientation(orientationView);
-
-        setSizeForTextViews(orientationView);
-
+//
+//        setGraphIntroTheView(orientationView);
+//
+//        setPozitionsLinearLayoutForOrientation(orientationView);
+//
+//        setSizeForTextViews(orientationView);
+//
         startCountAnimation();
+
+        setCombineGraphIntroTheView(orientationView);
 
         return view;
     }
@@ -70,35 +85,10 @@ public class SalesUgkFragmentGraph extends Fragment{
     }
     public void setOrientationView(Configuration newConfig){
 
-        setPozitionsLinearLayoutForOrientation(newConfig.orientation);
+       // setPozitionsLinearLayoutForOrientation(newConfig.orientation);
 
     }
 
-    private void setSizeForTextViews(int orientation){
-
-
-//        int heightDisplay = getDisplayHeight();
-//
-//        //Build numbers--------------------------------
-//        Module_Form_Settings modSet = new Module_Form_Settings(this);
-
-//        TextView textView_down1 = (TextView) view.findViewById(R.id.textView_numbers_down1);
-//        TextView textView_up1 = (TextView) view.findViewById(R.id.textView_numbers_up1);
-//        textView_down1.setTextSize(modSet.getSizeHeightView(ConstantsForms.MIDDLE_SIZE_NAME, heightDisplay, orientation));
-//        textView_up1.setTextSize(modSet.getSizeHeightView(ConstantsForms.MIDDLE_SIZE_NAME, heightDisplay, orientation));
-//
-//        TextView textView_down2_1 = (TextView) view.findViewById(R.id.textView_numbers_down2_1);
-//        TextView textView_up2_1 = (TextView) view.findViewById(R.id.textView_numbers_up2_1);
-//        textView_down2_1.setTextSize(modSet.getSizeHeightView(ConstantsForms.BIG_SIZE_NAME, heightDisplay, orientation));
-//        textView_up2_1.setTextSize(modSet.getSizeHeightView(ConstantsForms.BIG_SIZE_NAME, heightDisplay, orientation));
-//
-//        TextView textView_down2_2_2 = (TextView) view.findViewById(R.id.textView_numbers_down2_2_2);
-//        TextView textView_up2_2_2 = (TextView) view.findViewById(R.id.textView_numbers_up2_2_2);
-//        textView_down2_2_2.setTextSize(modSet.getSizeHeightView(ConstantsForms.MIDDLE_SIZE_NAME, heightDisplay, orientation));
-//        textView_up2_2_2.setTextSize(modSet.getSizeHeightView(ConstantsForms.MIDDLE_SIZE_NAME, heightDisplay, orientation));
-
-
-    }
 
     public int getDisplayHeight() {
 
@@ -116,205 +106,233 @@ public class SalesUgkFragmentGraph extends Fragment{
         return size.x;
     }
 
-
-    private void setPozitionsLinearLayoutForOrientation(int orientation){
-
-        LinearLayout llglobal = (LinearLayout) view.findViewById(R.id.linerlayout_global);
-        LinearLayout llnumbers = (LinearLayout) view.findViewById(R.id.linerlayout_numbers);
-
-//        LinearLayout llnumbers_up = (LinearLayout) view.findViewById(R.id.linerlayout_numbers_up);
-//        LinearLayout llnumbers_down = (LinearLayout) view.findViewById(R.id.linerlayout_numbers_down);
-//
-//        LinearLayout.LayoutParams params_up = new LinearLayout.LayoutParams(
-//                               LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//
-//        LinearLayout.LayoutParams params_down = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            llglobal.setOrientation(LinearLayout.HORIZONTAL);
-            llnumbers.setOrientation(LinearLayout.VERTICAL);
-
-//            params_up.setMargins(0,10,0,0);
-//            params_up.weight = 1;
-//            llnumbers_up.setLayoutParams(params_up);
-//            params_down.setMargins(0,0,0,10);
-//            params_down.weight = 1;
-//            llnumbers_down.setLayoutParams(params_down);
-
-
-
-        } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            llglobal.setOrientation(LinearLayout.VERTICAL);
-            llnumbers.setOrientation(LinearLayout.HORIZONTAL);
-
-//            params_up.setMargins(0,0,0,0);
-//            params_up.weight = 1;
-//            llnumbers_up.setLayoutParams(params_up);
-//            params_down.setMargins(0,0,0,0);
-//            params_down.weight = 1;
-//            llnumbers_down.setLayoutParams(params_down);
-
-       }
-//
-//        setSizeForTextViews(orientation);
-
-    }
-
-
     private void startCountAnimation() {
-        final TextView textView_down2_1 = (TextView) view.findViewById(R.id.textView_numbers_down2_1);
-        final TextView textView_up2_1 = (TextView) view.findViewById(R.id.textView_numbers_up2_1);
+        final TextView textView_header_graph = (TextView) view.findViewById(R.id.textView_header_graph);
 
-        final TextView textView_down2_2_2 = (TextView) view.findViewById(R.id.textView_numbers_down2_2_2);
-        final TextView textView_up2_2_2 = (TextView) view.findViewById(R.id.textView_numbers_up2_2_2);
-
-
-        ValueAnimator animatorBigProcent = new ValueAnimator();
-        animatorBigProcent.setObjectValues(0, 100);
-        animatorBigProcent.setDuration(ConstantsGlobal.MAX_TIME);
-        animatorBigProcent.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        ValueAnimator animatorHeaderGraph1 = new ValueAnimator();
+        animatorHeaderGraph1.setObjectValues(0,91);
+        animatorHeaderGraph1.setDuration(ConstantsGlobal.MAX_TIME);
+        animatorHeaderGraph1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_down2_1.setText("" + (int) animation.getAnimatedValue()+"%");
-                textView_up2_1.setText("" + (int) animation.getAnimatedValue()+"%");
+                textView_header_graph.setText("" + getString(R.string.nav_salesMoney_ua) + "  "+(int) animation.getAnimatedValue()+"%/"+"0"+"% ");
             }
         });
 
-        ValueAnimator animatorSmallProcent = new ValueAnimator();
-        animatorSmallProcent.setObjectValues(0, 88);
-        animatorSmallProcent.setDuration(ConstantsGlobal.MAX_TIME);
-        animatorSmallProcent.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        animatorHeaderGraph1.setObjectValues(0,115);
+        animatorHeaderGraph1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_down2_2_2.setText("" + (int) animation.getAnimatedValue()+"%");
-                textView_up2_2_2.setText("" + (int) animation.getAnimatedValue()+"%");
+                textView_header_graph.setText("" + getString(R.string.nav_salesMoney_ua) + "  "+"91"+"%/"+(int) animation.getAnimatedValue()+"% ");
             }
         });
+        animatorHeaderGraph1.start();
 
-        animatorBigProcent.start();
-        animatorSmallProcent.start();
     }
 
-    private void setGraphIntroTheView(int orientation){
-        // Build graph-------------------------
-        mChart = (LineChart) view.findViewById(R.id.chart);
+    private void setCombineGraphIntroTheView(int orientation){
 
-        ArrayList<Entry> entriesPlane = new ArrayList<>();
-        entriesPlane.add(new Entry(4f, 0));
-        entriesPlane.add(new Entry(8f, 1));
-        entriesPlane.add(new Entry(6f, 2));
-        entriesPlane.add(new Entry(2f, 3));
-        entriesPlane.add(new Entry(18f, 4));
-        entriesPlane.add(new Entry(9f, 5));
-        entriesPlane.add(new Entry(4f, 6));
-        entriesPlane.add(new Entry(8f, 7));
-        entriesPlane.add(new Entry(6f, 8));
-        entriesPlane.add(new Entry(2f, 9));
-        entriesPlane.add(new Entry(18f, 10));
-        entriesPlane.add(new Entry(9f, 11));
+        final String[] mMonths = new String[] {
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
+        };
 
-        ArrayList<Entry> entriesSalec = new ArrayList<>();
-        entriesSalec.add(new Entry(14f, 0));
-        entriesSalec.add(new Entry(18f, 1));
-        entriesSalec.add(new Entry(3f, 2));
-        entriesSalec.add(new Entry(12f, 3));
-        entriesSalec.add(new Entry(8f, 4));
-        entriesSalec.add(new Entry(16f, 5));
-        entriesSalec.add(new Entry(42f, 6));
-        entriesSalec.add(new Entry(8f, 7));
-        entriesSalec.add(new Entry(6f, 8));
-        entriesSalec.add(new Entry(2f, 9));
-        entriesSalec.add(new Entry(28f, 10));
-        entriesSalec.add(new Entry(9f, 11));
+        String[] mParties = new String[] {
+                "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
+                "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
+                "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
+                "Party Y", "Party Z"
+        };
 
-        ArrayList<LineDataSet> lines = new ArrayList<LineDataSet> ();
+//        Typeface mTfRegular = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+//        Typeface  mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
 
-        LineDataSet datasetPlane = new LineDataSet(entriesPlane, "План УГК");
-        datasetPlane.setDrawCubic(true); // Плавность
-        //datasetPlane.setDrawFilled(true); // Заполнение
-        //datasetPlane.setColors(ColorTemplate.COLORFUL_COLORS); // Цвет между точками
-        datasetPlane.setColor(Color.RED);
-        datasetPlane.setLineWidth(4f);
-        datasetPlane.setCircleSize(5f);
-        datasetPlane.setCircleColor(Color.RED);
-        datasetPlane.setFillAlpha(10);
-        datasetPlane.setFillColor(Color.BLACK);
-        datasetPlane.setDrawCubic(true);
-        datasetPlane.setDrawCircles(true);
-        lines.add(datasetPlane);
-
-        LineDataSet datasetSalec = new LineDataSet(entriesSalec, "Продажи УГК");
-        datasetSalec.setDrawCubic(true); // Плавность
-        //datasetSalec.setDrawFilled(true); // Заполнение
-        //datasetSalec.setColors(ColorTemplate.COLORFUL_COLORS); // Цвет между точками
-        datasetSalec.setColor(Color.BLUE);
-        datasetSalec.setLineWidth(4f);
-        datasetSalec.setCircleSize(5f);
-        datasetSalec.setCircleColor(Color.BLUE);
-        datasetSalec.setFillAlpha(10);
-        datasetSalec.setFillColor(Color.BLACK);
-        datasetSalec.setDrawCubic(true);
-        datasetSalec.setDrawCircles(true); //Использовать точки
-        lines.add(datasetSalec);
-
-        ArrayList<String> labels = new ArrayList<String>();
-        labels.add("Cіч.");
-        labels.add("Лют.");
-        labels.add("Бер.");
-        labels.add("Квіт.");
-        labels.add("Трав.");
-        labels.add("Черв.");
-        labels.add("Лип.");
-        labels.add("Серп.");
-        labels.add("Вер.");
-        labels.add("Жовт.");
-        labels.add("Лист.");
-        labels.add("Груд.");
-
-        LineData data = new LineData(labels, lines);
-
+        mChart = (CombinedChart) view.findViewById(R.id.chart);
         mChart.setDescription("");
-
+        mChart.setBackgroundColor(Color.WHITE);
         mChart.setDrawGridBackground(false);
+        mChart.setDrawBarShadow(false);
+        mChart.setHighlightFullBarEnabled(false);
+
+        // draw bars behind lines
+        mChart.setDrawOrder(new CombinedChart.DrawOrder[]{
+                CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.BUBBLE, CombinedChart.DrawOrder.CANDLE, CombinedChart.DrawOrder.LINE, CombinedChart.DrawOrder.SCATTER
+        });
+
+        //mChart.animateXY(ConstantsGlobal.MAX_TIME, ConstantsGlobal.MAX_TIME);
+        mChart.animateY(ConstantsGlobal.MAX_TIME);
+
+        Legend l = mChart.getLegend();
+        l.setWordWrapEnabled(true);
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+
+        YAxis rightAxis = mChart.getAxisRight();
+        rightAxis.setDrawGridLines(false);
+        rightAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true)
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true)
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
+        xAxis.setAxisMinValue(0f);
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(new AxisValueFormatter() {
+
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return mMonths[(int) value % mMonths.length];
+            }
+
+            @Override
+            public int getDecimalDigits() {
+                return 0;
+            }
+        });
+
+        CombinedData data = new CombinedData();
+
+        data.setData(generateLineData());
+        data.setData(generateBarData());
+        data.setData(generateBubbleData());
+        data.setData(generateScatterData());
+        data.setData(generateCandleData());
+       // data.setValueTypeface(mTfLight);
+
+        xAxis.setAxisMaxValue(data.getXMax() + 0.25f);
 
         mChart.setData(data);
+        mChart.invalidate();
+    }
 
-        // enable scaling and dragging
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(true);
-        mChart.setPinchZoom(true);
+    private LineData generateLineData() {
 
-        mChart.animateXY(ConstantsGlobal.MAX_TIME, ConstantsGlobal.MAX_TIME);
+        LineData d = new LineData();
 
-        // axis y---------------------------
-        YLabels yLabels = mChart.getYLabels();
-        yLabels.setTextSize(13f);
-        mChart.setDrawXLabels(true);
+        ArrayList<Entry> entries = new ArrayList<Entry>();
 
-        // axis x---------------------------
-        XLabels xLabels = mChart.getXLabels();
-        xLabels.setPosition(XLabels.XLabelPosition.BOTTOM);
-        xLabels.setAvoidFirstLastClipping(true);
-        xLabels.setTextSize(12);
+        for (int index = 0; index < itemcount; index++)
+            entries.add(new Entry(index + 0.5f, getRandom(15, 5)));
 
-        mChart.setDrawYLabels(true);
+        LineDataSet set = new LineDataSet(entries, "Line DataSet");
+        set.setColor(Color.rgb(240, 238, 70));
+        set.setLineWidth(2.5f);
+        set.setCircleColor(Color.rgb(240, 238, 70));
+        set.setCircleRadius(5f);
+        set.setFillColor(Color.rgb(240, 238, 70));
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        set.setDrawValues(true);
+        set.setValueTextSize(10f);
+        set.setValueTextColor(Color.rgb(240, 238, 70));
 
-        // Legend----------------------------
-        Legend l = mChart.getLegend();
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+        d.addDataSet(set);
 
-        l.setFormSize(10f); // set the size of the legend forms/shapes
-        l.setForm(Legend.LegendForm.CIRCLE);
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        l.setTextSize(15f);
-        l.setTextColor(Color.BLACK);
-        l.setXEntrySpace(5f); // set the space between the legend entries on the x-axis
-        l.setYEntrySpace(5f); // set the space between the legend entries on the y-axis
+        return d;
+    }
 
-        Paint p = mChart.getPaint(Chart.PAINT_VALUES);
-        p.setTextSize(13f);
-        p.setColor(Color.BLACK);
 
-        mChart.setPaint(p, Chart.PAINT_VALUES);
 
+    private BarData generateBarData() {
+
+        ArrayList<BarEntry> entries1 = new ArrayList<BarEntry>();
+        ArrayList<BarEntry> entries2 = new ArrayList<BarEntry>();
+
+        for (int index = 0; index < itemcount; index++) {
+            entries1.add(new BarEntry(0, getRandom(25, 25)));
+
+            // stacked
+            entries2.add(new BarEntry(0, new float[]{getRandom(13, 12), getRandom(13, 12)}));
+        }
+
+        BarDataSet set1 = new BarDataSet(entries1, "Bar 1");
+        set1.setColor(Color.rgb(60, 220, 78));
+        set1.setValueTextColor(Color.rgb(60, 220, 78));
+        set1.setValueTextSize(10f);
+        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        BarDataSet set2 = new BarDataSet(entries2, "");
+        set2.setStackLabels(new String[]{"Stack 1", "Stack 2"});
+        set2.setColors(new int[]{Color.rgb(61, 165, 255), Color.rgb(23, 197, 255)});
+        set2.setValueTextColor(Color.rgb(61, 165, 255));
+        set2.setValueTextSize(10f);
+        set2.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        float groupSpace = 0.06f;
+        float barSpace = 0.02f; // x2 dataset
+        float barWidth = 0.45f; // x2 dataset
+        // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
+
+        BarData d = new BarData(set1, set2);
+        d.setBarWidth(barWidth);
+
+        // make this BarData object grouped
+        d.groupBars(0, groupSpace, barSpace); // start at x = 0
+
+        return d;
+    }
+
+    protected ScatterData generateScatterData() {
+
+        ScatterData d = new ScatterData();
+
+        ArrayList<Entry> entries = new ArrayList<Entry>();
+
+        for (float index = 0; index < itemcount; index += 0.5f)
+            entries.add(new Entry(index + 0.25f, getRandom(10, 55)));
+
+        ScatterDataSet set = new ScatterDataSet(entries, "Scatter DataSet");
+        set.setColors(ColorTemplate.MATERIAL_COLORS);
+        set.setScatterShapeSize(7.5f);
+        set.setDrawValues(false);
+        set.setValueTextSize(10f);
+        d.addDataSet(set);
+
+        return d;
+    }
+
+    protected CandleData generateCandleData() {
+
+        CandleData d = new CandleData();
+
+        ArrayList<CandleEntry> entries = new ArrayList<CandleEntry>();
+
+        for (int index = 0; index < itemcount; index += 2)
+            entries.add(new CandleEntry((int) (index + 1f), 90, 70, 85, 75f));
+
+        CandleDataSet set = new CandleDataSet(entries, "Candle DataSet");
+        set.setDecreasingColor(Color.rgb(142, 150, 175));
+        set.setShadowColor(Color.DKGRAY);
+        set.setBarSpace(0.3f);
+        set.setValueTextSize(10f);
+        set.setDrawValues(false);
+        d.addDataSet(set);
+
+        return d;
+    }
+
+    protected BubbleData generateBubbleData() {
+
+        BubbleData bd = new BubbleData();
+
+        ArrayList<BubbleEntry> entries = new ArrayList<BubbleEntry>();
+
+        for (int index = 0; index < itemcount; index++) {
+            float y = getRandom(10, 105);
+            float size = getRandom(100, 105);
+            entries.add(new BubbleEntry(index + 0.5f, y, size));
+        }
+
+        BubbleDataSet set = new BubbleDataSet(entries, "Bubble DataSet");
+        set.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        set.setValueTextSize(10f);
+        set.setValueTextColor(Color.WHITE);
+        set.setHighlightCircleWidth(1.5f);
+        set.setDrawValues(true);
+        bd.addDataSet(set);
+
+        return bd;
+    }
+
+    protected float getRandom(float range, float startsfrom) {
+        return (float) (Math.random() * range) + startsfrom;
     }
 }

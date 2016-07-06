@@ -36,6 +36,22 @@
     <string name="_100">100%</string>
     <string name="_88">88</string>
 
-    <string name="custom_lang_orientation">1</string>
+    <string name="sales_ugk_table_m">∑Місяць</string>
+    <string name="sales_ugk_table_d">∑День</string>
+    <string name="sales_ugk_table_delta12">∆ 12</string>
+    <string name="sales_ugk_table_delta3">∆ 3</string>
+    <string name="sales_ugk_table_delta1">∆ 1</string>
+
+    <string name="plane_12q_name">12Q</string>
+    <string name="plane_3q_name">3Q</string>
+    <string name="plane_1q_name">1Q</string>
+    <string name="plane_12s_name">12S</string>
+    <string name="plane_3s_name">3S</string>
+    <string name="plane_1s_name">1S</string>
+
+    <string name="norm_name">Норм</string>
+    <string name="fact_name">Факт</string>
+    <string name="quantityClients_name">Кол.кл</string>
+    <string name="averageClients_name">Ср.чек кл</string>
 
 </resources>

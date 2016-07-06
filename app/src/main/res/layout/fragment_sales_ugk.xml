@@ -4,313 +4,398 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <LinearLayout
-        android:orientation="vertical"
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:stretchColumns="*"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
+        <TableRow android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_width="match_parent">
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:padding="7dp"
+                android:nestedScrollingEnabled="true"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:background="@drawable/shape_dark_blue" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sales_ugk_table_m"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sales_ugk_table_d"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sales_ugk_table_delta12"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sales_ugk_table_delta3"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sales_ugk_table_delta1"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:background="#eeeeee"
-            android:stretchColumns="*"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Показники травень 2016"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Відхилення [від 12Q]"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Відхилення [від 3Q]"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+        <TableRow android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_width="match_parent">
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/plane_12q_name"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
 
-            </TableRow>
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2012-11-22"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="397"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="19039.21"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="19039.21"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="19039.21"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-            </TableRow>
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2012-11-23"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="348"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="16759.28"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="16759.28"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="16759.28"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-            </TableRow>
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2012-11-24"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="305"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        </TableRow>
+        <TableRow android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/plane_3q_name"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:background="#eeeeee"
-            android:stretchColumns="*"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Показники травень 2016"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Відхилення [від 12Q]"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Відхилення [від 3Q]"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+        <TableRow android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/plane_1q_name"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
 
-            </TableRow>
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2012-11-22"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="397"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="19039.21"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="19039.21"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="19039.21"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-            </TableRow>
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2012-11-23"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="348"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="16759.28"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="16759.28"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="16759.28"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-            </TableRow>
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2012-11-24"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="305"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-            </TableRow>
-            <TableRow android:padding="5dp">
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2012-11-24"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="305"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-                <TextView android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="14527.19"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+        </TableRow>
+        <TableRow android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/norm_name"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+
+        </TableRow>
+        <TableRow android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/fact_name"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+
+        </TableRow>
+        <TableRow android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_width="match_parent">
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/quantityClients_name"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+
+        </TableRow>
+        <TableRow android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_width="match_parent">
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/averageClients_name"
+                android:background="@drawable/shape_dark_blue"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/shape"
+                android:textSize="@dimen/textView_numbers_big_textsize"
+                android:padding="7dp"/>
+
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

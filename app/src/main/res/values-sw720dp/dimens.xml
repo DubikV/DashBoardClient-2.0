@@ -13,4 +13,7 @@
     <dimen name="linerlayout_numbers_down_marginRight">10dp</dimen>
     <dimen name="linerlayout_numbers_down_marginBottom">10dp</dimen>
     <dimen name="linerlayout_numbers_down_marginLeft">0dp</dimen>
+
+    <dimen name="textView_numbers_big_textsize">50sp</dimen>
+
 </resources>

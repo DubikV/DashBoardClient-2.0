@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
 
-public class TabFragmentSalesUGK extends Fragment {
+public class TabFragmentSalesMoney extends Fragment {
 
     private static TabLayout tabLayout;
     private static ViewPager viewPager;
@@ -25,7 +25,7 @@ public class TabFragmentSalesUGK extends Fragment {
         tabLayout = (TabLayout) x.findViewById(R.id.tabLayout);
         viewPager = (ViewPager) x.findViewById(R.id.vievPager);
 
-        TabPageSalesUGKFragmentAdapter adapter = new TabPageSalesUGKFragmentAdapter((getChildFragmentManager()));
+        TabPageSalesMoneyFragmentAdapter adapter = new TabPageSalesMoneyFragmentAdapter((getChildFragmentManager()));
         viewPager.setAdapter(adapter);
 
         tabLayout.post(new Runnable() {

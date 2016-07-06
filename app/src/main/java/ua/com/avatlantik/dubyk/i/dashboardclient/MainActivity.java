@@ -14,6 +14,7 @@ import android.view.Display;
 import android.view.MenuItem;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsForms;
+import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesMoney;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesUGK;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.SettingsFragment;
 
@@ -131,6 +132,13 @@ public class MainActivity extends AppCompatActivity {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesUGK()).commit();
                 }
+
+                if (item.getItemId() == R.id.nav_salesMoney) {
+                    toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+                }
+
 
 //                if (item.getItemId() == R.id.nav_salesMoney) {
 //                    toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
