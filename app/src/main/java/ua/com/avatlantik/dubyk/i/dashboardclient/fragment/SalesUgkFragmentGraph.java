@@ -109,21 +109,27 @@ public class SalesUgkFragmentGraph extends Fragment{
     private void startCountAnimation() {
         final TextView textView_header_graph = (TextView) view.findViewById(R.id.textView_header_graph);
 
-        ValueAnimator animatorHeaderGraph1 = new ValueAnimator();
-        animatorHeaderGraph1.setObjectValues(0,91);
-        animatorHeaderGraph1.setDuration(ConstantsGlobal.MAX_TIME);
-        animatorHeaderGraph1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        final ValueAnimator animatorHeaderGraph2 = new ValueAnimator();
+        animatorHeaderGraph2.setObjectValues(0,115);
+        animatorHeaderGraph2.setDuration(ConstantsGlobal.HALF_TIME);
+        animatorHeaderGraph2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesMoney_ua) + "  "+(int) animation.getAnimatedValue()+"%/"+"0"+"% ");
+                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "  "+"91"+"%/"+(int) animation.getAnimatedValue()+"% ");
             }
         });
 
-        animatorHeaderGraph1.setObjectValues(0,115);
+        ValueAnimator animatorHeaderGraph1 = new ValueAnimator();
+        animatorHeaderGraph1.setObjectValues(0,91);
+        animatorHeaderGraph1.setDuration(ConstantsGlobal.HALF_TIME);
         animatorHeaderGraph1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesMoney_ua) + "  "+"91"+"%/"+(int) animation.getAnimatedValue()+"% ");
+                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "  "+(int) animation.getAnimatedValue()+"%/"+"0"+"% ");
+                if (animation.getAnimatedValue().toString().equals("91")) {
+                    animatorHeaderGraph2.start();
+                }
             }
         });
+
         animatorHeaderGraph1.start();
 
     }

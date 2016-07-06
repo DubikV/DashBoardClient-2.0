@@ -48,10 +48,10 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.R;
         private CombinedChart mChart;
         private final int itemcount = 12;
 
-        public static SalesUgkFragmentGraph getInstance() {
+        public static MoneyFragmentGraph getInstance() {
 
             Bundle args = new Bundle();
-            SalesUgkFragmentGraph fragment = new SalesUgkFragmentGraph();
+            MoneyFragmentGraph fragment = new MoneyFragmentGraph();
             fragment.setArguments(args);
             return  fragment;
         }
