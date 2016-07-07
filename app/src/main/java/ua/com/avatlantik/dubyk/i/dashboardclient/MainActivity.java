@@ -14,8 +14,10 @@ import android.view.Display;
 import android.view.MenuItem;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsForms;
+import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_ReadWrite_Data;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesMoney;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesUGK;
+import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.InfoFragment;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,13 +29,18 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
+    private Module_ReadWrite_Data module_readWrite_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
 
+        module_readWrite_data = new Module_ReadWrite_Data(this);
+
         res = getResources();
+
+        module_readWrite_data.readDataFromMemory();
 
         initToolbar();
 
@@ -45,7 +52,27 @@ public class MainActivity extends AppCompatActivity {
 
         setDisplaySizeInConstants();
 
+        setTextLoginToBar();
+
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        module_readWrite_data.saveDataToMemory();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        module_readWrite_data.saveDataToMemory();
+
+    }
+
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         toolbar.inflateMenu(R.menu.main);
+
+
     }
 
     private void initTabs() {
@@ -120,12 +149,12 @@ public class MainActivity extends AppCompatActivity {
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 drawerLayout.closeDrawers();
+
 
                 if (item.getItemId() == R.id.nav_salesUgk) {
                     toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
@@ -145,6 +174,12 @@ public class MainActivity extends AppCompatActivity {
 //                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
 //                    xfragmentTransaction.replace(R.id.containerView,new TabFragmentMoney()).commit();
 //                }
+
+                if (item.getItemId() == R.id.nav_info) {
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerView,new InfoFragment()).commit();
+
+                }
 
                 if (item.getItemId() == R.id.nav_settings) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
@@ -210,4 +245,15 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+    private void setTextLoginToBar() {
+
+//        TextView text_nav_heared_login = (TextView) findViewById(R.id.text_nav_heared_login);
+//
+//        if (settingsUser.getUserLogin() != null){
+//            text_nav_heared_login.setText(settingsUser.getUserLogin());
+//        }
+   }
+
+
 }

@@ -35,6 +35,7 @@ public class TabFragmentSalesMoney extends Fragment {
             }
         });
 
+
         return x;
 
     }

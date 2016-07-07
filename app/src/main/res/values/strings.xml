@@ -3,6 +3,7 @@
     <string name="app_name">Dash Board</string>
     // info develop
     <string name="dev_info_mail">i.dubyk@avatlantik.com.ua</string>
+    <string name="support_info_mail">support@avatlantik.com.ua</string>
     <string name="dev_info">Dubik V.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -28,6 +29,15 @@
     <string name="nav_info">Info</string>
     <string name="nav_exit_ua">Вихід</string>
     <string name="nav_exit">Exit</string>
+
+    <string name="login_name">Логін :</string>
+    <string name="password_name">Пароль :</string>
+    <string name="server_name">Сервер :</string>
+    <string name="enter_login_name">Введіть логін ...</string>
+    <string name="enter_password_name">Введіть пароль ...</string>
+    <string name="enter_server_name">Введіть адресу серверу ...</string>
+    <string name="enter_data">Введіть дані :</string>
+    <string name="save">Зберегти</string>
 
     <string name="section_format">Привет из Серкции : %1$d</string>
 
