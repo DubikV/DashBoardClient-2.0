@@ -64,4 +64,9 @@
     <string name="quantityClients_name">Кол.кл</string>
     <string name="averageClients_name">Ср.чек кл</string>
 
+    <string name="title_Exit">Вихід :</string>
+    <string name="questions_Exit">Ви впевнені що хочете вийти ?</string>
+    <string name="questions_Exit_answer_yes">Так</string>
+    <string name="questions_Exit_answer_no">Ні</string>
+
 </resources>

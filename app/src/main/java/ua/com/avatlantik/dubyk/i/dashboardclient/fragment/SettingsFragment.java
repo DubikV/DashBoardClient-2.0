@@ -2,10 +2,13 @@ package ua.com.avatlantik.dubyk.i.dashboardclient.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -83,13 +86,20 @@ public class SettingsFragment extends Fragment{
 
         module_readWrite_data.saveDataToMemory();
 
-//        Toolbar toolbar;
-//
-//        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
-//        FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-//        xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+        /* hide keyboard */
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
 
+        Toolbar toolbar = (Toolbar) view.getRootView().findViewById(R.id.toolbar);
+        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
+
+        NavigationView navigationView = (NavigationView) view.getRootView().findViewById(R.id.nav_view);
+        navigationView.getMenu().findItem(R.id.nav_salesUgk).setChecked(false);
+        //navigationView.setCheckedItem(R.id.nav_salesUgk);
+        //navigationView.dispatchSetSelected(true);
     }
+
+
 
 }

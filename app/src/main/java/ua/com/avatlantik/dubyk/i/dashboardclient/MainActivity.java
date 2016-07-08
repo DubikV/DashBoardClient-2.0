@@ -1,5 +1,6 @@
 package ua.com.avatlantik.dubyk.i.dashboardclient;
 
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -8,13 +9,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsForms;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_ReadWrite_Data;
+import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingsUser;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesMoney;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesUGK;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.InfoFragment;
@@ -52,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         setDisplaySizeInConstants();
 
-        setTextLoginToBar();
 
     }
 
@@ -144,17 +149,54 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initNavigationView() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.syncState();
 
+        // Initializing Drawer Layout and ActionBarToggle
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+
+                 /* hide keyboard */
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+
+                TextView text_nav_heared_login = (TextView) findViewById(R.id.text_nav_heared_login);
+
+                SettingsUser settingsUser = SettingsUser.getInstance();
+
+                if (settingsUser.getUserLogin() != null){
+
+                text_nav_heared_login.setText(settingsUser.getUserLogin());
+
+                }
+
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        //Setting the actionbarToggle to drawer layout
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+        //calling sync state is necessay or else your hamburger icon wont show up
+        actionBarDrawerToggle.syncState();
+
+        //Initializing NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 drawerLayout.closeDrawers();
 
+                item.setChecked(true);
 
                 if (item.getItemId() == R.id.nav_salesUgk) {
                     toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
@@ -169,12 +211,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-//                if (item.getItemId() == R.id.nav_salesMoney) {
-//                    toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
-//                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-//                    xfragmentTransaction.replace(R.id.containerView,new TabFragmentMoney()).commit();
-//                }
-
                 if (item.getItemId() == R.id.nav_info) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerView,new InfoFragment()).commit();
@@ -188,45 +224,37 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (item.getItemId() == R.id.nav_exit) {
-                    System.exit(0);
+
+                    SetOnExitApp();
 
                 }
                 return false;
-
-//                switch (item.getItemId()) {
-//                    case R.id.nav_salesUgk:
-//                        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
-//                        showNotificationTab();
-//                        break;
-//                    case R.id.nav_salesMoney:
-//                        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
-//                        showNotificationTab();
-//                        break;
-//                    case R.id.nav_margin:
-//                        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_margin_ua));
-//                        break;
-//                    case R.id.nav_stocks:
-//                        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_stocks_ua));
-//                        break;
-//                    case R.id.nav_settings:
-//                        toolbar.setTitle(getString(R.string.action_settings_ua));
-//                        break;
-//                    case R.id.nav_loadData:
-//                        toolbar.setTitle(getString(R.string.nav_loaddata_ua));
-//                        break;
-//                    case R.id.nav_info:
-//                        toolbar.setTitle(getString(R.string.nav_info_ua));
-//                        break;
-//                    case R.id.nav_exit:
-//                        toolbar.setTitle(getString(R.string.nav_exit_ua));
-//                        break;
-//                }
-//                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//                drawer.closeDrawer(GravityCompat.START);
-//                return true;
             }
 
         });
+    }
+
+    private void SetOnExitApp() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.title_Exit));
+        builder.setMessage(getString(R.string.questions_Exit));
+
+        builder.setPositiveButton(getString(R.string.questions_Exit_answer_yes), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                System.exit(0);
+
+            }
+        });
+
+        builder.setNegativeButton(getString(R.string.questions_Exit_answer_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public void setDisplaySizeInConstants() {
@@ -245,15 +273,6 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-
-    private void setTextLoginToBar() {
-
-//        TextView text_nav_heared_login = (TextView) findViewById(R.id.text_nav_heared_login);
-//
-//        if (settingsUser.getUserLogin() != null){
-//            text_nav_heared_login.setText(settingsUser.getUserLogin());
-//        }
-   }
 
 
 }
