@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,10 +54,53 @@ public class SettingsFragment extends Fragment{
     private void initElementsForm() {
 
         editT_login = (EditText) view.findViewById(R.id.editText_login);
+        editT_login.requestFocus();
         editT_password = (EditText) view.findViewById(R.id.editText_password);
         editT_server = (EditText) view.findViewById(R.id.editText_adressServer);
-
         buttonSave = (Button) view.findViewById(R.id.btn_enter);
+
+        editT_login.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    editT_login.clearFocus();
+                    editT_password.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        editT_password.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    editT_password.clearFocus();
+                    editT_server.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        editT_server.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    editT_server.clearFocus();
+                    buttonSave.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         buttonSave.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -95,9 +139,8 @@ public class SettingsFragment extends Fragment{
         toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
 
         NavigationView navigationView = (NavigationView) view.getRootView().findViewById(R.id.nav_view);
-        navigationView.getMenu().findItem(R.id.nav_salesUgk).setChecked(false);
-        //navigationView.setCheckedItem(R.id.nav_salesUgk);
-        //navigationView.dispatchSetSelected(true);
+        navigationView.getMenu().performIdentifierAction(R.id.nav_salesUgk, 0);
+
     }
 
 

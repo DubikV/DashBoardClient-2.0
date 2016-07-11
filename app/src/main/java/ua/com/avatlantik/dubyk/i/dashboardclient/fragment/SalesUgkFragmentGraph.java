@@ -40,6 +40,7 @@ public class SalesUgkFragmentGraph extends Fragment{
     private View view;
     private CombinedChart mChart;
     private final int itemcount = 12;
+    private ArrayList<String> mMonths;
 
     public static SalesUgkFragmentGraph getInstance() {
 
@@ -145,9 +146,19 @@ public class SalesUgkFragmentGraph extends Fragment{
 
     private void setCombineGraphIntroTheView(int orientation){
 
-        final String[] mMonths = new String[] {
-                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
-        };
+        final ArrayList<String> mMonths = new ArrayList<>();
+        mMonths.add("JAN");
+        mMonths.add("FEB");
+        mMonths.add("MAR");
+        mMonths.add("APR");
+        mMonths.add("MAY");
+        mMonths.add("JUN");
+        mMonths.add("JUL");
+        mMonths.add("AUG");
+        mMonths.add("SEP");
+        mMonths.add("OKT");
+        mMonths.add("NOV");
+        mMonths.add("DEC");
 
         mChart = (CombinedChart) view.findViewById(R.id.chart);
         mChart.setDescription("");
@@ -156,17 +167,16 @@ public class SalesUgkFragmentGraph extends Fragment{
         mChart.setDrawBarShadow(false);
         mChart.setHighlightFullBarEnabled(false);
 
-        // draw bars behind lines
         mChart.setDrawOrder(new CombinedChart.DrawOrder[]{
                 CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.LINE
         });
 
-        //mChart.animateXY(ConstantsGlobal.MAX_TIME, ConstantsGlobal.MAX_TIME);
         mChart.animateY(ConstantsGlobal.MAX_TIME);
 
         Legend l = mChart.getLegend();
         l.setWordWrapEnabled(true);
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        l.setTextSize(15f);
 
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setDrawGridLines(true);
@@ -175,8 +185,9 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setDrawGridLines(false);
+        leftAxis.setDrawAxisLine(true);
         leftAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true)
-        leftAxis.setEnabled(false);//setTextSize(-1f);
+        leftAxis.setEnabled(false);
 
 
         XAxis xAxis = mChart.getXAxis();
@@ -184,11 +195,13 @@ public class SalesUgkFragmentGraph extends Fragment{
         xAxis.setAxisMinValue(0f);
         xAxis.setGranularity(1f);
         xAxis.setTextSize(20f);
+        xAxis.setDrawGridLines(false);
+        xAxis.setLabelCount(mMonths.size());
         xAxis.setValueFormatter(new AxisValueFormatter() {
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return mMonths[(int) value % mMonths.length];
+                return mMonths.get((int) value % mMonths.size());
             }
 
             @Override
@@ -200,10 +213,8 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         CombinedData data = new CombinedData();
 
-        data.setData(generateBarData());
-        data.setData(generateBarData());
         data.setData(generateLineData());
-       // data.setValueTypeface(mTfLight);
+        data.setData(generateBarData());
 
         xAxis.setAxisMaxValue(data.getXMax() + 0.25f);
 
@@ -227,10 +238,11 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
-        for (int index = 0; index < itemcount; index++)
-            entries.add(new Entry(index + 0.5f, getRandom(15, 5)));
+        entries.add(new Entry(0, 0));
+        for (int index = 1; index < itemcount; index++)
+            entries.add(new Entry(index, getRandom(15, 5)));
 
-        LineDataSet set = new LineDataSet(entries, "Line DataSet");
+        LineDataSet set = new LineDataSet(entries, getString(R.string.norm_name));
         set.setColor(Color.BLUE);
         set.setLineWidth(4f);
         set.setCircleColor(Color.BLUE);
@@ -250,18 +262,18 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
+        entries.add(new Entry(0, 55));
         for (int index = 0; index < itemcount; index++)
             entries.add(new Entry(index + 0.5f, 55));
 
 
-        LineDataSet set = new LineDataSet(entries, "Line DataSet");
+        LineDataSet set = new LineDataSet(entries, getString(R.string.plane_12q_name));
         set.setColor(Color.BLUE);
         set.setDrawValues(false);
         set.setDrawCircles(false);
         set.setLineWidth(1f);
         set.setDrawFilled(true);
         set.setFillColor(Color.BLUE);
-        //set.setFillAlpha();
 
         return set;
     }
@@ -270,16 +282,17 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
+        entries.add(new Entry(0, 42));
         for (int index = 0; index < itemcount; index++)
             entries.add(new Entry(index + 0.5f, 42));
 
-        LineDataSet set = new LineDataSet(entries, "Line DataSet");
+        LineDataSet set = new LineDataSet(entries, getString(R.string.plane_3q_name));
         set.setColor(Color.GREEN);
         set.setDrawValues(false);
         set.setDrawCircles(false);
         set.setLineWidth(1f);
         set.setDrawFilled(true);
-        set.setFillColor(Color.BLUE);
+        set.setFillColor(Color.GREEN);
         set.setFillAlpha(100);
 
         return set;
@@ -289,16 +302,17 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
+        entries.add(new Entry(0, 36));
         for (int index = 0; index < itemcount; index++)
             entries.add(new Entry(index + 0.5f, 36));
 
-        LineDataSet set = new LineDataSet(entries, "Line DataSet");
+        LineDataSet set = new LineDataSet(entries, getString(R.string.plane_1q_name));
         set.setColor(Color.YELLOW);
         set.setDrawValues(false);
         set.setDrawCircles(false);
         set.setLineWidth(1f);
         set.setDrawFilled(true);
-        set.setFillColor(Color.BLUE);
+        set.setFillColor(Color.YELLOW);
         set.setFillAlpha(100);
 
         return set;
@@ -308,12 +322,12 @@ public class SalesUgkFragmentGraph extends Fragment{
 
     private BarData generateBarData() {
 
+
         ArrayList<BarEntry> entries1 = new ArrayList<BarEntry>();
         ArrayList<BarEntry> entries2 = new ArrayList<BarEntry>();
 
         for (int index = 0; index < itemcount; index++) {
             entries1.add(new BarEntry(0, getRandom(25, 25)));
-
         }
 
         BarDataSet set1 = new BarDataSet(entries1, "Bar 1");
@@ -327,6 +341,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         float groupSpace = 0.06f;
         float barSpace = 0.02f; // x2 dataset
         float barWidth = 0.45f; // x2 dataset
+        // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
 
         BarData d = new BarData(set1, set2);
         d.setBarWidth(barWidth);
