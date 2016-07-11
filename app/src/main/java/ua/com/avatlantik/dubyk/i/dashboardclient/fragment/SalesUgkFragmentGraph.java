@@ -162,13 +162,14 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         mChart = (CombinedChart) view.findViewById(R.id.chart);
         mChart.setDescription("");
-        mChart.setBackgroundColor(Color.WHITE);
+        mChart.setBackgroundColor(getResources().getColor(R.color.colorBlueWhite));
         mChart.setDrawGridBackground(false);
         mChart.setDrawBarShadow(false);
         mChart.setHighlightFullBarEnabled(false);
 
         mChart.setDrawOrder(new CombinedChart.DrawOrder[]{
-                CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.LINE
+                CombinedChart.DrawOrder.LINE,
+                CombinedChart.DrawOrder.BAR
         });
 
         mChart.animateY(ConstantsGlobal.MAX_TIME);
@@ -179,20 +180,21 @@ public class SalesUgkFragmentGraph extends Fragment{
         l.setTextSize(15f);
 
         YAxis rightAxis = mChart.getAxisRight();
-        rightAxis.setDrawGridLines(true);
+        rightAxis.setDrawGridLines(false);
+        rightAxis.setDrawAxisLine(true);
         rightAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true)
-        rightAxis.setTextSize(20f);
+        rightAxis.setEnabled(false);
 
         YAxis leftAxis = mChart.getAxisLeft();
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setDrawAxisLine(true);
+        leftAxis.setDrawGridLines(true);
         leftAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true)
-        leftAxis.setEnabled(false);
+        leftAxis.setTextSize(20f);
 
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setAxisMinValue(0f);
+        xAxis.setAxisMaxValue(12f);
         xAxis.setGranularity(1f);
         xAxis.setTextSize(20f);
         xAxis.setDrawGridLines(false);
@@ -213,8 +215,9 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         CombinedData data = new CombinedData();
 
-        data.setData(generateLineData());
+
         data.setData(generateBarData());
+        data.setData(generateLineData());
 
         xAxis.setAxisMaxValue(data.getXMax() + 0.25f);
 
@@ -240,7 +243,7 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         entries.add(new Entry(0, 0));
         for (int index = 1; index < itemcount; index++)
-            entries.add(new Entry(index, getRandom(15, 5)));
+            entries.add(new Entry(index, getRandom(25, 25)));
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.norm_name));
         set.setColor(Color.BLUE);
@@ -274,6 +277,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         set.setLineWidth(1f);
         set.setDrawFilled(true);
         set.setFillColor(Color.BLUE);
+        set.setFillAlpha(100);
 
         return set;
     }
@@ -322,12 +326,11 @@ public class SalesUgkFragmentGraph extends Fragment{
 
     private BarData generateBarData() {
 
-
         ArrayList<BarEntry> entries1 = new ArrayList<BarEntry>();
         ArrayList<BarEntry> entries2 = new ArrayList<BarEntry>();
 
         for (int index = 0; index < itemcount; index++) {
-            entries1.add(new BarEntry(0, getRandom(25, 25)));
+            entries1.add(new BarEntry(0, getRandom(15, 5)));
         }
 
         BarDataSet set1 = new BarDataSet(entries1, "Bar 1");
@@ -338,9 +341,9 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         BarDataSet set2 = new BarDataSet(entries2, "");
 
-        float groupSpace = 0.06f;
-        float barSpace = 0.02f; // x2 dataset
-        float barWidth = 0.45f; // x2 dataset
+        float groupSpace = 0f;
+        float barSpace = 0f; // x2 dataset
+        float barWidth = 0.6f; // x2 dataset
         // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
 
         BarData d = new BarData(set1, set2);

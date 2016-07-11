@@ -71,9 +71,9 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.R;
 //
 //        setSizeForTextViews(orientationView);
 //
-            startCountAnimation();
+        //    startCountAnimation();
 
-            setCombineGraphIntroTheView(orientationView);
+       //     setCombineGraphIntroTheView(orientationView);
 
             return view;
         }
