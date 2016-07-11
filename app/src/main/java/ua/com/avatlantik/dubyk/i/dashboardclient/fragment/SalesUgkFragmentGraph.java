@@ -177,26 +177,26 @@ public class SalesUgkFragmentGraph extends Fragment{
         Legend l = mChart.getLegend();
         l.setWordWrapEnabled(true);
         l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        l.setTextSize(15f);
+        l.setTextSize(getResources().getDimension(R.dimen.graph_legend_textsize));
 
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setDrawGridLines(false);
         rightAxis.setDrawAxisLine(true);
-        rightAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true)
+        rightAxis.setAxisMinValue(getResources().getDimension(R.dimen.zero_size)); // this replaces setStartAtZero(true)
         rightAxis.setEnabled(false);
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setDrawGridLines(true);
-        leftAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true)
-        leftAxis.setTextSize(20f);
+        leftAxis.setAxisMinValue(getResources().getDimension(R.dimen.zero_size)); // this replaces setStartAtZero(true)
+        leftAxis.setTextSize(getResources().getDimension(R.dimen.axis_textSize));
 
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setAxisMinValue(0f);
-        xAxis.setAxisMaxValue(12f);
-        xAxis.setGranularity(1f);
-        xAxis.setTextSize(20f);
+        xAxis.setAxisMinValue(getResources().getDimension(R.dimen.zero_size));
+        //xAxis.setAxisMaxValue(12f); // Max size
+        //xAxis.setGranularity(5f);   // Division of the scale
+        xAxis.setTextSize(getResources().getDimension(R.dimen.axis_textSize));
         xAxis.setDrawGridLines(false);
         xAxis.setLabelCount(mMonths.size());
         xAxis.setValueFormatter(new AxisValueFormatter() {
@@ -219,7 +219,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         data.setData(generateBarData());
         data.setData(generateLineData());
 
-        xAxis.setAxisMaxValue(data.getXMax() + 0.25f);
+        xAxis.setAxisMaxValue(data.getXMax() + getResources().getDimension(R.dimen.additions_to_max_sizeLine));
 
         mChart.setData(data);
         mChart.invalidate();
@@ -247,13 +247,13 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.norm_name));
         set.setColor(Color.BLUE);
-        set.setLineWidth(4f);
+        set.setLineWidth(getResources().getDimension(R.dimen.graph_lineWidth));
         set.setCircleColor(Color.BLUE);
-        set.setCircleRadius(4f);
+        set.setCircleRadius(getResources().getDimension(R.dimen.graph_lineWidth));
         set.setFillColor(Color.BLUE);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setDrawValues(true);
-        set.setValueTextSize(15f);
+        set.setValueTextSize(getResources().getDimension(R.dimen.graph_legend_textsize));
         set.setValueTextColor(Color.BLUE);
 
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -271,12 +271,12 @@ public class SalesUgkFragmentGraph extends Fragment{
 
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.plane_12q_name));
-        set.setColor(Color.BLUE);
+        set.setColor(getResources().getColor(R.color.color_graph_blue));
         set.setDrawValues(false);
         set.setDrawCircles(false);
-        set.setLineWidth(1f);
+        set.setLineWidth(getResources().getDimension(R.dimen.graph_minlineWidth));
         set.setDrawFilled(true);
-        set.setFillColor(Color.BLUE);
+        set.setFillColor(getResources().getColor(R.color.color_graph_blue));
         set.setFillAlpha(100);
 
         return set;
@@ -291,12 +291,12 @@ public class SalesUgkFragmentGraph extends Fragment{
             entries.add(new Entry(index + 0.5f, 42));
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.plane_3q_name));
-        set.setColor(Color.GREEN);
+        set.setColor(getResources().getColor(R.color.color_graph_yellow));
         set.setDrawValues(false);
         set.setDrawCircles(false);
-        set.setLineWidth(1f);
+        set.setLineWidth(getResources().getDimension(R.dimen.graph_minlineWidth));
         set.setDrawFilled(true);
-        set.setFillColor(Color.GREEN);
+        set.setFillColor(getResources().getColor(R.color.color_graph_yellow));
         set.setFillAlpha(100);
 
         return set;
@@ -311,12 +311,12 @@ public class SalesUgkFragmentGraph extends Fragment{
             entries.add(new Entry(index + 0.5f, 36));
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.plane_1q_name));
-        set.setColor(Color.YELLOW);
+        set.setColor(getResources().getColor(R.color.color_graph_pink));
         set.setDrawValues(false);
         set.setDrawCircles(false);
-        set.setLineWidth(1f);
+        set.setLineWidth(getResources().getDimension(R.dimen.graph_minlineWidth));
         set.setDrawFilled(true);
-        set.setFillColor(Color.YELLOW);
+        set.setFillColor(getResources().getColor(R.color.color_graph_pink));
         set.setFillAlpha(100);
 
         return set;
@@ -333,17 +333,17 @@ public class SalesUgkFragmentGraph extends Fragment{
             entries1.add(new BarEntry(0, getRandom(15, 5)));
         }
 
-        BarDataSet set1 = new BarDataSet(entries1, "Bar 1");
+        BarDataSet set1 = new BarDataSet(entries1, getString(R.string.fact_name));
         set1.setColor(Color.RED);
         set1.setValueTextColor(Color.RED);
-        set1.setValueTextSize(15f);
+        set1.setValueTextSize(getResources().getDimension(R.dimen.graph_legend_textsize));
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
 
         BarDataSet set2 = new BarDataSet(entries2, "");
 
-        float groupSpace = 0f;
-        float barSpace = 0f; // x2 dataset
-        float barWidth = 0.6f; // x2 dataset
+        float groupSpace = getResources().getDimension(R.dimen.zero_size);
+        float barSpace = getResources().getDimension(R.dimen.zero_size); // x2 dataset
+        float barWidth = getResources().getDimension(R.dimen.barWidth_middle); // x2 dataset
         // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
 
         BarData d = new BarData(set1, set2);

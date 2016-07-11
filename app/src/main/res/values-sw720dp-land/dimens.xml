@@ -16,4 +16,16 @@
 
     <dimen name="textView_numbers_big_textsize">30sp</dimen>
 
+    //===graph=============
+    <dimen name="graph_legend_textsize">15dp</dimen>
+    <dimen name="zero_size">0dp</dimen>
+
+
+
+
+
+
+
+
+
 </resources>
