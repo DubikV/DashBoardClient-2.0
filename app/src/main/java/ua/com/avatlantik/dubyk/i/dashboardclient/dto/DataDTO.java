@@ -23,6 +23,7 @@ public class DataDTO {
                 if (_instance == null)
                     _instance = new DataDTO();
             }
+
         return _instance;
 
     }
@@ -58,14 +59,5 @@ public class DataDTO {
     public void setAdditionalInfoDTO(ArrayList<AdditionalInfoDTO> additionalInfoDTO) {
         this.additionalInfoDTO = additionalInfoDTO;
     }
-
-    public static DataDTO get_instance() {
-        return _instance;
-    }
-
-    public static void set_instance(DataDTO _instance) {
-        DataDTO._instance = _instance;
-    }
-
 
 }

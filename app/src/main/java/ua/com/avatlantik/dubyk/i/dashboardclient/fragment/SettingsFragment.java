@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_ReadWrite_Data;
@@ -25,6 +26,7 @@ public class SettingsFragment extends Fragment{
     private View view;
     private Button buttonSave;
     private EditText editT_login, editT_password, editT_server;
+    private Switch avtDown_switch;
     private SettingsUser settingsUser;
     private SettingConnect settingConnect;
 
@@ -57,6 +59,7 @@ public class SettingsFragment extends Fragment{
         editT_login.requestFocus();
         editT_password = (EditText) view.findViewById(R.id.editText_password);
         editT_server = (EditText) view.findViewById(R.id.editText_adressServer);
+        avtDown_switch = (Switch) view.findViewById(R.id.avtDown_switch);
         buttonSave = (Button) view.findViewById(R.id.btn_enter);
 
         editT_login.setOnKeyListener(new View.OnKeyListener() {
@@ -114,6 +117,7 @@ public class SettingsFragment extends Fragment{
         editT_login.setText(settingsUser.getUserLogin());
         editT_password.setText(settingsUser.getUserPassword());
         editT_server.setText(settingConnect.getAdressServer());
+        avtDown_switch.setChecked(settingConnect.isAvtoDownload());
     }
 
 
@@ -122,6 +126,7 @@ public class SettingsFragment extends Fragment{
         settingsUser.setUserLogin(editT_login.getText().toString());
         settingsUser.setUserPassword(editT_password.getText().toString());
         settingConnect.setAdressServer(editT_server.getText().toString());
+        settingConnect.setAvtoDownload(avtDown_switch.isChecked());
 
         TextView text_nav_heared_login = (TextView) view.getRootView().findViewById(R.id.text_nav_heared_login);;
         text_nav_heared_login.setText(settingsUser.getUserLogin());

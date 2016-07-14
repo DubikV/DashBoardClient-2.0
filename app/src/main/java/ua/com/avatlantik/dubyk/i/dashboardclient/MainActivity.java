@@ -18,8 +18,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsForms;
+import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_GetURL;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_ReadWrite_Data;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingsUser;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesMoney;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
     private Module_ReadWrite_Data module_readWrite_data;
+    private Module_GetURL module_getURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(LAYOUT);
 
         module_readWrite_data = new Module_ReadWrite_Data(this);
+        module_getURL = new Module_GetURL();
 
         res = getResources();
 
@@ -133,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_loadData) {
+            downloadData();
             return true;
         }
 
@@ -215,6 +220,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
+                if (item.getItemId() == R.id.nav_loadData) {
+                    downloadData();
+                }
+
                 if (item.getItemId() == R.id.nav_exit) {
 
                     SetOnExitApp();
@@ -264,6 +273,27 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception e){
             super.onBackPressed();
         }
+    }
+
+    public void downloadData(){
+
+        String url = module_getURL.getGetURL("salesUGK");
+        DownloadData downloadData = new DownloadData();
+        downloadData.setMainActivity(this);
+        downloadData.setNameData("salesUGK");
+        downloadData.execute(url);
+
+
+//        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
+//        FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+//        xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesUGK()).commit();
+
+    }
+
+    public void setToastToActivity(String textToast){
+
+        Toast.makeText(getApplicationContext(), textToast, Toast.LENGTH_LONG).show();
+
     }
 
 

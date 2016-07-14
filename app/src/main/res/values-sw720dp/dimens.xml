@@ -16,11 +16,18 @@
 
     <dimen name="textView_numbers_big_textsize">50sp</dimen>
 
-    //===graph=============
+    ///===graph=============
     <dimen name="graph_legend_textsize">15dp</dimen>
     <dimen name="zero_size">0dp</dimen>
+    <dimen name="axis_textSize">20dp</dimen>
+    <dimen name="dot_valueTextSize">15dp</dimen>
+    <dimen name="graph_lineWidth">4dp</dimen>
+    <dimen name="graph_lineCircleRadius">4dp</dimen>
+    <dimen name="graph_minlineWidth">1dp</dimen>
+    <dimen name="additions_to_max_sizeLine">0.25dp</dimen>
+    <dimen name="barWidth_middle">0.6dp</dimen>
 
-
+    <dimen name="graph_margin">10dp</dimen>
 
 
 

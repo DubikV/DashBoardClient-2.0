@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGKDTO;
 
 /**
  * Created by i.dubyk on 24.06.2016.
@@ -40,7 +43,9 @@ public class SalesUgkFragmentGraph extends Fragment{
     private View view;
     private CombinedChart mChart;
     private final int itemcount = 12;
-    private ArrayList<String> mMonths;
+    private ArrayList<SalesUGKDTO> salesUGK;
+    private ArrayList<String> xAxisList;
+    private int plane_12Q, plane_3Q, plane_1Q;
 
     public static SalesUgkFragmentGraph getInstance() {
 
@@ -56,6 +61,29 @@ public class SalesUgkFragmentGraph extends Fragment{
         view = inflater.inflate(LAYOUT, container, false);
 
         int orientationView = getResources().getConfiguration().orientation;
+
+        DataDTO dataDTO = DataDTO.getInstance();
+
+        salesUGK = dataDTO.getSalesUGKDTO();
+
+        if (salesUGK == null){
+            Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
+            return view;
+        }
+
+        xAxisList = new ArrayList<>();
+        for (SalesUGKDTO salesUGKDTO: salesUGK) {
+            if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
+                xAxisList.add(String.valueOf(salesUGKDTO.getNumberDay()));
+                plane_12Q = salesUGKDTO.getValye();
+            }
+            if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_3Q)) {
+                plane_3Q = salesUGKDTO.getValye();
+            }
+            if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_1Q)) {
+                plane_1Q = salesUGKDTO.getValye();
+            }
+        }
 
         startCountAnimation();
 
@@ -146,20 +174,6 @@ public class SalesUgkFragmentGraph extends Fragment{
 
     private void setCombineGraphIntroTheView(int orientation){
 
-        final ArrayList<String> mMonths = new ArrayList<>();
-        mMonths.add("JAN");
-        mMonths.add("FEB");
-        mMonths.add("MAR");
-        mMonths.add("APR");
-        mMonths.add("MAY");
-        mMonths.add("JUN");
-        mMonths.add("JUL");
-        mMonths.add("AUG");
-        mMonths.add("SEP");
-        mMonths.add("OKT");
-        mMonths.add("NOV");
-        mMonths.add("DEC");
-
         mChart = (CombinedChart) view.findViewById(R.id.chart);
         mChart.setDescription("");
         mChart.setBackgroundColor(getResources().getColor(R.color.colorBlueWhite));
@@ -194,16 +208,17 @@ public class SalesUgkFragmentGraph extends Fragment{
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setAxisMinValue(getResources().getDimension(R.dimen.zero_size));
+        //xAxis.setAxisMaxValue(xAxisList.size());
         //xAxis.setAxisMaxValue(12f); // Max size
         //xAxis.setGranularity(5f);   // Division of the scale
         xAxis.setTextSize(getResources().getDimension(R.dimen.axis_textSize));
         xAxis.setDrawGridLines(false);
-        xAxis.setLabelCount(mMonths.size());
+        xAxis.setLabelCount(xAxisList.size());
         xAxis.setValueFormatter(new AxisValueFormatter() {
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return mMonths.get((int) value % mMonths.size());
+                return xAxisList.get((int) value % xAxisList.size());
             }
 
             @Override
@@ -242,18 +257,20 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, 0));
-        for (int index = 1; index < itemcount; index++)
-            entries.add(new Entry(index, getRandom(25, 25)));
+        for (SalesUGKDTO salesUGKDTO: salesUGK)
+            if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.NORM)) {
+                entries.add(new Entry(salesUGKDTO.getNumberDay(), salesUGKDTO.getValye()));
+            }
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.norm_name));
         set.setColor(Color.BLUE);
         set.setLineWidth(getResources().getDimension(R.dimen.graph_lineWidth));
         set.setCircleColor(Color.BLUE);
-        set.setCircleRadius(getResources().getDimension(R.dimen.graph_lineWidth));
+        set.setCircleRadius(getResources().getDimension(R.dimen.graph_lineCircleRadius));
         set.setFillColor(Color.BLUE);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setDrawValues(true);
-        set.setValueTextSize(getResources().getDimension(R.dimen.graph_legend_textsize));
+        set.setValueTextSize(getResources().getDimension(R.dimen.dot_valueTextSize));
         set.setValueTextColor(Color.BLUE);
 
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -265,9 +282,12 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
-        entries.add(new Entry(0, 55));
-        for (int index = 0; index < itemcount; index++)
-            entries.add(new Entry(index + 0.5f, 55));
+        entries.add(new Entry(0, plane_12Q));
+        for (SalesUGKDTO salesUGKDTO: salesUGK) {
+            if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
+                entries.add(new Entry(salesUGKDTO.getNumberDay(), salesUGKDTO.getValye()));
+            }
+        }
 
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.plane_12q_name));
@@ -286,9 +306,11 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
-        entries.add(new Entry(0, 42));
-        for (int index = 0; index < itemcount; index++)
-            entries.add(new Entry(index + 0.5f, 42));
+        entries.add(new Entry(0, plane_3Q));
+        for (SalesUGKDTO salesUGKDTO: salesUGK)
+            if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_3Q)) {
+                entries.add(new Entry(salesUGKDTO.getNumberDay()-1, salesUGKDTO.getValye()));
+            }
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.plane_3q_name));
         set.setColor(getResources().getColor(R.color.color_graph_yellow));
@@ -306,9 +328,11 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
-        entries.add(new Entry(0, 36));
-        for (int index = 0; index < itemcount; index++)
-            entries.add(new Entry(index + 0.5f, 36));
+        entries.add(new Entry(0, plane_1Q));
+        for (SalesUGKDTO salesUGKDTO: salesUGK)
+            if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_1Q)) {
+                entries.add(new Entry(salesUGKDTO.getNumberDay()-1, salesUGKDTO.getValye()));
+            }
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.plane_1q_name));
         set.setColor(getResources().getColor(R.color.color_graph_pink));
@@ -329,14 +353,15 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<BarEntry> entries1 = new ArrayList<BarEntry>();
         ArrayList<BarEntry> entries2 = new ArrayList<BarEntry>();
 
-        for (int index = 0; index < itemcount; index++) {
-            entries1.add(new BarEntry(0, getRandom(15, 5)));
-        }
+        for (SalesUGKDTO salesUGKDTO: salesUGK)
+            if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.FACT)) {
+                entries1.add(new BarEntry(1, salesUGKDTO.getValye()));
+            }
 
         BarDataSet set1 = new BarDataSet(entries1, getString(R.string.fact_name));
         set1.setColor(Color.RED);
         set1.setValueTextColor(Color.RED);
-        set1.setValueTextSize(getResources().getDimension(R.dimen.graph_legend_textsize));
+        set1.setValueTextSize(getResources().getDimension(R.dimen.dot_valueTextSize));
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
 
         BarDataSet set2 = new BarDataSet(entries2, "");

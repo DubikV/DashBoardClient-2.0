@@ -33,6 +33,9 @@
     <string name="login_name">Логін :</string>
     <string name="password_name">Пароль :</string>
     <string name="server_name">Сервер :</string>
+    <string name="avt_download">Автоматична загрузка :</string>
+    <string name="on_short_ua">Вкл.</string>
+    <string name="off_short_ua">Викл.</string>
     <string name="enter_login_name">Введіть логін ...</string>
     <string name="enter_password_name">Введіть пароль ...</string>
     <string name="enter_server_name">Введіть адресу серверу ...</string>
@@ -68,5 +71,17 @@
     <string name="questions_Exit">Ви впевнені що хочете вийти ?</string>
     <string name="questions_Exit_answer_yes">Так</string>
     <string name="questions_Exit_answer_no">Ні</string>
+
+    //===download data
+    <string name="error_retrieving_data">Помилка отримання даних</string>
+    <string name="error_processing_data">Помилка обробки даних даних</string>
+    <string name="error_data_not_found">Дані не найдено</string>
+    <string name="error_no_data">Відсутні дані! Потрібно загрузити дані з серверу!</string>
+    <string name="error_authorisation_error">Помилка авторизації</string>
+    <string name="error_invalid_query">Помилка запиту</string>
+    <string name="finish_dowload_data">Завантаження даних закінчено</string>
+
+    <string name="dowload_data_from_server">Завантаження даних з серверу...</string>
+    <string name="treatment_data">Обробка даних...</string>
 
 </resources>
