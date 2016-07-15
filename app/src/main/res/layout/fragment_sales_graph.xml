@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Заголовок"
+            android:text="@string/error_no_data"
             android:id="@+id/textView_header_graph"
             android:layout_gravity="top|center|right"
             android:textSize="@dimen/textView_numbers_big_textsize"

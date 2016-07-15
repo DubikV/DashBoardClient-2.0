@@ -10,6 +10,10 @@ public class DataDTO {
     private Date dateDownload;
     private ArrayList<SalesUGKDTO> salesUGKDTO;
     private ArrayList<SalesUGKTableDTO> salesUGKTableDTO;
+
+    private ArrayList<MoneyDTO> moneyDTO;
+    private ArrayList<MoneyTableDTO> moneyTableDTO;
+
     private ArrayList<AdditionalInfoDTO> additionalInfoDTO;
 
     private static volatile DataDTO _instance = null;
@@ -60,4 +64,19 @@ public class DataDTO {
         this.additionalInfoDTO = additionalInfoDTO;
     }
 
+    public ArrayList<MoneyTableDTO> getMoneyTableDTO() {
+        return moneyTableDTO;
+    }
+
+    public void setMoneyTableDTO(ArrayList<MoneyTableDTO> moneyTableDTO) {
+        this.moneyTableDTO = moneyTableDTO;
+    }
+
+    public ArrayList<MoneyDTO> getMoneyDTO() {
+        return moneyDTO;
+    }
+
+    public void setMoneyDTO(ArrayList<MoneyDTO> moneyDTO) {
+        this.moneyDTO = moneyDTO;
+    }
 }

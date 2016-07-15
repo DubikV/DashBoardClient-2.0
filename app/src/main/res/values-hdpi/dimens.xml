@@ -25,6 +25,7 @@
     <dimen name="graph_lineCircleRadius">2dp</dimen>
     <dimen name="graph_minlineWidth">0.5dp</dimen>
     <dimen name="additions_to_max_sizeLine">0.15dp</dimen>
+    <dimen name="addisize_to_graph">0.25dp</dimen>
     <dimen name="barWidth_middle">0.4dp</dimen>
 
     <dimen name="graph_margin">4dp</dimen>

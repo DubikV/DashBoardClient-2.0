@@ -2,6 +2,7 @@ package ua.com.avatlantik.dubyk.i.dashboardclient;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.support.design.widget.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +31,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
     private ProgressDialog progressDialog;
     private String nameData;
     private DataDTO dataDTO;
+    private boolean openStart;
 
 
     public MainActivity getMainActivity() {
@@ -46,6 +48,14 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
     public void setNameData(String nameData) {
         this.nameData = nameData;
+    }
+
+    public boolean isOpenStart() {
+        return openStart;
+    }
+
+    public void setOpenStart(boolean openStart) {
+        this.openStart = openStart;
     }
 
     @Override
@@ -82,6 +92,13 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
         progressDialog.cancel();
         mainActivity.setToastToActivity(result);
 
+
+        if(openStart) {
+            NavigationView navigationView = (NavigationView) mainActivity.findViewById(R.id.nav_view);
+            navigationView.getMenu().performIdentifierAction(R.id.nav_salesUgk, 0);
+        }
+
+
     }
 
     public String downloadData(String urlData) throws IOException {
@@ -94,6 +111,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
         urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
         urlConnection.setUseCaches(false);
+        urlConnection.setConnectTimeout(10000);
         urlConnection.connect();
         int status = urlConnection.getResponseCode();
 
@@ -154,7 +172,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
                 JSONObject SalesUGK = SalesUGKDTOarray.getJSONObject(i);
 
-                array.add(new SalesUGKDTO(SalesUGK.getString("typeData"), SalesUGK.getInt("numberDay"), SalesUGK.getInt("value")));
+                array.add(new SalesUGKDTO(SalesUGK.optString("typeData",""), SalesUGK.optInt("numberDay",0), SalesUGK.optDouble("value",0.0)));
             }
 
             dataDTO.setSalesUGKDTO(array);

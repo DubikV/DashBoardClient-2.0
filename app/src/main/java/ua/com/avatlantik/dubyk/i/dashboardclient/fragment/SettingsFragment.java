@@ -1,10 +1,10 @@
 package ua.com.avatlantik.dubyk.i.dashboardclient.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import ua.com.avatlantik.dubyk.i.dashboardclient.MainActivity;
+import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_GetURL;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_ReadWrite_Data;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingConnect;
@@ -139,12 +141,41 @@ public class SettingsFragment extends Fragment{
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
+        askToDowloadData();
 
-        Toolbar toolbar = (Toolbar) view.getRootView().findViewById(R.id.toolbar);
-        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
 
-        NavigationView navigationView = (NavigationView) view.getRootView().findViewById(R.id.nav_view);
-        navigationView.getMenu().performIdentifierAction(R.id.nav_salesUgk, 0);
+//        Toolbar toolbar = (Toolbar) view.getRootView().findViewById(R.id.toolbar);
+//        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
+//
+//        NavigationView navigationView = (NavigationView) view.getRootView().findViewById(R.id.nav_view);
+//        navigationView.getMenu().performIdentifierAction(R.id.nav_salesUgk, 0);
+
+    }
+
+    private void askToDowloadData() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(getString(R.string.ask_to_dowload_data));
+
+        builder.setPositiveButton(getString(R.string.questions_Exit_answer_yes), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Module_GetURL module_getURL = new Module_GetURL((MainActivity) getActivity());
+                if(module_getURL.getCheckConnektion()) {
+                    ((MainActivity) getActivity()).downloadData();
+                }
+
+            }
+        });
+
+        builder.setNegativeButton(getString(R.string.questions_Exit_answer_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
 
     }
 

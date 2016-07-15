@@ -3,13 +3,13 @@ package ua.com.avatlantik.dubyk.i.dashboardclient.dto;
 /**
  * Created by i.dubyk on 07.07.2016.
  */
-public class SalesUGKDTO {
+public class MoneyDTO {
 
     private String typeData;
     private int numberDay;
     private double valye;
 
-    public SalesUGKDTO(String typeData, int numberDay, double valye) {
+    public MoneyDTO(String typeData, int numberDay, double valye) {
         this.typeData = typeData;
         this.numberDay = numberDay;
         this.valye = valye;

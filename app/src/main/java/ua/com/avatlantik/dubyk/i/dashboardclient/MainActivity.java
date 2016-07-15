@@ -13,7 +13,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -47,11 +46,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(LAYOUT);
 
         module_readWrite_data = new Module_ReadWrite_Data(this);
-        module_getURL = new Module_GetURL();
+        module_getURL = new Module_GetURL(this);
 
         res = getResources();
 
         module_readWrite_data.readDataFromMemory();
+
 
         initToolbar();
 
@@ -59,10 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         initTabs();
 
-        initMail();
-
         setDisplaySizeInConstants();
-
 
     }
 
@@ -90,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
+
+                int id = menuItem.getItemId();
+
+                if (id == R.id.action_loadData) {
+                 downloadData();
+                 return true;
+                }
                 return false;
 
             }
@@ -108,48 +112,17 @@ public class MainActivity extends AppCompatActivity {
 
    }
 
-    private void initMail() {
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_loadData) {
-            downloadData();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
     private void initNavigationView() {
 
         // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                return super.onOptionsItemSelected(item);
+            }
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -196,33 +169,35 @@ public class MainActivity extends AppCompatActivity {
                 item.setChecked(true);
 
                 if (item.getItemId() == R.id.nav_salesUgk) {
-                    toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
+                    setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesUGK()).commit();
                 }
 
                 if (item.getItemId() == R.id.nav_salesMoney) {
-                    toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
+                    setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                     xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
                 }
 
 
                 if (item.getItemId() == R.id.nav_info) {
+                    setToolbarText(getString(R.string.nav_info_ua));
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerView,new InfoFragment()).commit();
 
                 }
 
                 if (item.getItemId() == R.id.nav_settings) {
+                    setToolbarText(getString(R.string.action_settings_ua));
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerView,new SettingsFragment()).commit();
 
                 }
 
-                if (item.getItemId() == R.id.nav_loadData) {
-                    downloadData();
-                }
+//                if (item.getItemId() == R.id.nav_loadData) {
+//                    downloadData();
+//                }
 
                 if (item.getItemId() == R.id.nav_exit) {
 
@@ -277,16 +252,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void downloadData(){
 
-        String url = module_getURL.getGetURL("salesUGK");
-        DownloadData downloadData = new DownloadData();
-        downloadData.setMainActivity(this);
-        downloadData.setNameData("salesUGK");
-        downloadData.execute(url);
+        if(module_getURL.getCheckConnektion()) {
 
+                String url = module_getURL.getGetURL("salesUGK");
+                DownloadData downloadData = new DownloadData();
+                downloadData.setMainActivity(this);
+                downloadData.setNameData("salesUGK");
+                downloadData.setOpenStart(true);
+                downloadData.execute(url);
 
-//        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
-//        FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-//        xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesUGK()).commit();
+        }
+
+    }
+
+    public void setToolbarText(String text){
+
+        toolbar.setTitle(text);
 
     }
 
