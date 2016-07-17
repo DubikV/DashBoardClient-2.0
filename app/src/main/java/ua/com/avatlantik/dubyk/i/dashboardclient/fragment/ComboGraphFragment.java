@@ -44,16 +44,16 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.R;
 /**
  * Created by i.dubyk on 24.06.2016.
  */
-public class MarginFragmentGraph extends Fragment{
+public class ComboGraphFragment extends Fragment{
     private static  final int LAYOUT = R.layout.fragment_sales_graph;
     private View view;
     private CombinedChart mChart;
     private final int itemcount = 12;
 
-    public static MarginFragmentGraph getInstance() {
+    public static ComboGraphFragment getInstance() {
 
         Bundle args = new Bundle();
-        MarginFragmentGraph fragment = new MarginFragmentGraph();
+        ComboGraphFragment fragment = new ComboGraphFragment();
         fragment.setArguments(args);
         return  fragment;
     }

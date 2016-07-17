@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGKDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKDTO;
 
 /**
  * Created by i.dubyk on 11.07.2016.
@@ -32,30 +32,22 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
     private String nameData;
     private DataDTO dataDTO;
     private boolean openStart;
-
-
-    public MainActivity getMainActivity() {
-        return mainActivity;
-    }
+    private int idItemSelected;
 
     public void setMainActivity(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
-    }
-
-    public String getNameData() {
-        return nameData;
     }
 
     public void setNameData(String nameData) {
         this.nameData = nameData;
     }
 
-    public boolean isOpenStart() {
-        return openStart;
-    }
-
     public void setOpenStart(boolean openStart) {
         this.openStart = openStart;
+    }
+
+    public void setIdItemSelected(int idItemSelected) {
+        this.idItemSelected = idItemSelected;
     }
 
     @Override
@@ -95,7 +87,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
         if(openStart) {
             NavigationView navigationView = (NavigationView) mainActivity.findViewById(R.id.nav_view);
-            navigationView.getMenu().performIdentifierAction(R.id.nav_salesUgk, 0);
+            navigationView.getMenu().performIdentifierAction(idItemSelected, 0);
         }
 
 

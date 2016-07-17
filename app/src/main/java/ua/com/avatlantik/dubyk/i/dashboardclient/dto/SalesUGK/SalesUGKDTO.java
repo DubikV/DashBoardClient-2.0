@@ -1,4 +1,4 @@
-package ua.com.avatlantik.dubyk.i.dashboardclient.dto;
+package ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK;
 
 /**
  * Created by i.dubyk on 07.07.2016.

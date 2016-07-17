@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGKTableDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKTableDTO;
 
 /**
  * Created by i.dubyk on 24.06.2016.
@@ -19,6 +21,8 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGKTableDTO;
 public class SalesUgkFragment  extends Fragment{
     private static  final int LAYOUT = R.layout.fragment_sales_ugk;
     private View view;
+    private DataDTO dataDTO;
+    private ArrayList<SalesUGKTableDTO> salesUGKTableDTO;
 
     public static SalesUgkFragment getInstance() {
 
@@ -33,6 +37,15 @@ public class SalesUgkFragment  extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
 
+        dataDTO = DataDTO.getInstance();
+
+        salesUGKTableDTO = dataDTO.getSalesUGKTableDTO();
+
+        if (salesUGKTableDTO == null){
+            Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
+            return view;
+        }
+
         setData();
 
         return view;
@@ -40,17 +53,7 @@ public class SalesUgkFragment  extends Fragment{
 
     private void setData() {
 
-        ArrayList<SalesUGKTableDTO> salesUGKTableDTOs = new ArrayList<>();
-        salesUGKTableDTOs.add(new SalesUGKTableDTO("12Q", 234, 3423, 34,98, 0));
-        salesUGKTableDTOs.add(new SalesUGKTableDTO("3Q", 0, 22,0 ,98, 0));
-        salesUGKTableDTOs.add(new SalesUGKTableDTO("1Q", 0, 11, 34,0, 0));
-        salesUGKTableDTOs.add(new SalesUGKTableDTO(getString(R.string.norm_name), 0, 11, 34,0, 0));
-        salesUGKTableDTOs.add(new SalesUGKTableDTO(getString(R.string.fact_name), 0, 11, 34,0, 0));
-        salesUGKTableDTOs.add(new SalesUGKTableDTO(getString(R.string.quantityClients_name), 0, 11, 34,0, 0));
-        salesUGKTableDTOs.add(new SalesUGKTableDTO(getString(R.string.averageClients_name), 0, 11, 34,0, 0));
-
-
-        for (SalesUGKTableDTO sales: salesUGKTableDTOs){
+        for (SalesUGKTableDTO sales: salesUGKTableDTO){
             if (sales.getTypeData().equalsIgnoreCase(getString(R.string.plane_12q_name))){
                 setDataToView(R.id.textView1_1, sales.getSumMonth());
                 setDataToView(R.id.textView1_2, sales.getSumDay());
@@ -105,7 +108,7 @@ public class SalesUgkFragment  extends Fragment{
     }
 
 
-    private void setDataToView(int tviewid, int data) {
+    private void setDataToView(int tviewid, double data) {
         TextView tview = (TextView) view.findViewById(tviewid);
         if(data == 0){
             tview.setText("");

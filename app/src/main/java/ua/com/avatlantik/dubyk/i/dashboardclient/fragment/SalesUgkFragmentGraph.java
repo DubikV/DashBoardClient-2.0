@@ -30,7 +30,8 @@ import java.util.ArrayList;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGKDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKAddDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKDTO;
 
 /**
  * Created by i.dubyk on 24.06.2016.
@@ -39,6 +40,7 @@ public class SalesUgkFragmentGraph extends Fragment{
     private static  final int LAYOUT = R.layout.fragment_sales_graph;
     private View view;
     private CombinedChart mChart;
+    private DataDTO dataDTO;
     private ArrayList<SalesUGKDTO> salesUGK;
     private ArrayList<String> xAxisList;
     private double plane_12Q, plane_3Q, plane_1Q;
@@ -58,7 +60,7 @@ public class SalesUgkFragmentGraph extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
 
-        DataDTO dataDTO = DataDTO.getInstance();
+        dataDTO = DataDTO.getInstance();
 
         salesUGK = dataDTO.getSalesUGKDTO();
 
@@ -80,49 +82,56 @@ public class SalesUgkFragmentGraph extends Fragment{
 
     private void startCountAnimation() {
 
+        SalesUGKAddDTO salesUGKAddDTO = dataDTO.getSalesUGKAddDTO();
+
+        final Double planeNormUGK = salesUGKAddDTO.getPlaneNormUGK();
+        final Double plane = salesUGKAddDTO.getPlane();
+        Double fact = salesUGKAddDTO.getFact();
+        final Double factNormUGK = salesUGKAddDTO.getFactNormUGK();
+
         final TextView textView_header_graph = (TextView) view.findViewById(R.id.textView_header_graph);
 
         final ValueAnimator animatorHeaderGraph4 = new ValueAnimator();
-        animatorHeaderGraph4.setObjectValues(0,87);
+        animatorHeaderGraph4.setObjectValues(0,fact);
         animatorHeaderGraph4.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+"91"+"%/"+"115"+"%"+"   "+"69"+"/"+(int) animation.getAnimatedValue());
+                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+String.valueOf(factNormUGK)+"%"+"   "+String.valueOf(plane)+"/"+(int) animation.getAnimatedValue());
 
             }
         });
 
         final ValueAnimator animatorHeaderGraph3 = new ValueAnimator();
-        animatorHeaderGraph3.setObjectValues(0,69);
+        animatorHeaderGraph3.setObjectValues(0,plane);
         animatorHeaderGraph3.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+"91"+"%/"+"115"+"%"+"   "+(int) animation.getAnimatedValue()+"/0");
-                if (animation.getAnimatedValue().toString().equals("69")) {
+                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+String.valueOf(factNormUGK)+"%"+"   "+(int) animation.getAnimatedValue()+"/0");
+                if (animation.getAnimatedValue()==plane) {
                     animatorHeaderGraph4.start();
                 }
             }
         });
 
         final ValueAnimator animatorHeaderGraph2 = new ValueAnimator();
-        animatorHeaderGraph2.setObjectValues(0,115);
+        animatorHeaderGraph2.setObjectValues(0,factNormUGK);
         animatorHeaderGraph2.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+"91"+"%/"+(int) animation.getAnimatedValue()+"%"+"   "+"0/0");
-                if (animation.getAnimatedValue().toString().equals("115")) {
+                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+(int) animation.getAnimatedValue()+"%"+"   "+"0/0");
+                if (animation.getAnimatedValue()==factNormUGK) {
                     animatorHeaderGraph3.start();
                 }
             }
         });
 
         ValueAnimator animatorHeaderGraph1 = new ValueAnimator();
-        animatorHeaderGraph1.setObjectValues(0,91);
+        animatorHeaderGraph1.setObjectValues(0,planeNormUGK);
         animatorHeaderGraph1.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+(int) animation.getAnimatedValue()+"%/"+"0%"+"   "+"0/0");
-                if (animation.getAnimatedValue().toString().equals("91")) {
+                if (animation.getAnimatedValue()==planeNormUGK) {
                     animatorHeaderGraph2.start();
                 }
             }

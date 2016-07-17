@@ -22,6 +22,7 @@ import android.widget.Toast;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsForms;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_GetURL;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_ReadWrite_Data;
+import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingConnect;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingsUser;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesMoney;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesUGK;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction mFragmentTransaction;
     private Module_ReadWrite_Data module_readWrite_data;
     private Module_GetURL module_getURL;
+    private SettingConnect settingConnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         module_readWrite_data = new Module_ReadWrite_Data(this);
         module_getURL = new Module_GetURL(this);
+        settingConnect = SettingConnect.getInstance();
 
         res = getResources();
 
@@ -169,15 +172,19 @@ public class MainActivity extends AppCompatActivity {
                 item.setChecked(true);
 
                 if (item.getItemId() == R.id.nav_salesUgk) {
-                    setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesUGK()).commit();
+                    onNavigationItemSelectedSalesUGK();
                 }
 
                 if (item.getItemId() == R.id.nav_salesMoney) {
-                    setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
-                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+                    onNavigationItemSelectedMoney();
+                }
+
+                if (item.getItemId() == R.id.nav_margin) {
+                    onNavigationItemSelectedMargin();
+                }
+
+                if (item.getItemId() == R.id.nav_stocks) {
+                    onNavigationItemSelectedStocks();
                 }
 
 
@@ -195,10 +202,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-//                if (item.getItemId() == R.id.nav_loadData) {
-//                    downloadData();
-//                }
-
                 if (item.getItemId() == R.id.nav_exit) {
 
                     SetOnExitApp();
@@ -209,6 +212,97 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
+    private void onNavigationItemSelectedSalesUGK(){
+
+        if (settingConnect.isAvtoDownload()) {
+
+            if(module_getURL.getCheckConnektion()) {
+
+                String url = module_getURL.getGetURL("salesUGK");
+                DownloadData downloadData = new DownloadData();
+                downloadData.setMainActivity(this);
+                downloadData.setNameData("salesUGK");
+                downloadData.setOpenStart(true);
+                downloadData.execute(url);
+
+            }
+
+        }else {
+            setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
+            FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+            xfragmentTransaction.replace(R.id.containerView, new TabFragmentSalesUGK()).commit();
+        }
+    }
+
+    private void onNavigationItemSelectedMoney(){
+
+        if (settingConnect.isAvtoDownload()) {
+
+            if(module_getURL.getCheckConnektion()) {
+
+                String url = module_getURL.getGetURL("money");
+                DownloadData downloadData = new DownloadData();
+                downloadData.setMainActivity(this);
+                downloadData.setNameData("salesUGK");
+                downloadData.setOpenStart(true);
+                downloadData.execute(url);
+
+            }
+
+        }else {
+            setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
+            FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+            xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+        }
+    }
+
+    private void onNavigationItemSelectedMargin(){
+
+        if (settingConnect.isAvtoDownload()) {
+
+            if(module_getURL.getCheckConnektion()) {
+
+                String url = module_getURL.getGetURL("money");
+                DownloadData downloadData = new DownloadData();
+                downloadData.setMainActivity(this);
+                downloadData.setNameData("salesUGK");
+                downloadData.setOpenStart(true);
+                downloadData.execute(url);
+
+            }
+
+        }else {
+            setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_margin_ua));
+            FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+            xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+        }
+    }
+
+    private void onNavigationItemSelectedStocks(){
+
+        if (settingConnect.isAvtoDownload()) {
+
+            if(module_getURL.getCheckConnektion()) {
+
+                String url = module_getURL.getGetURL("money");
+                DownloadData downloadData = new DownloadData();
+                downloadData.setMainActivity(this);
+                downloadData.setNameData("salesUGK");
+                downloadData.setOpenStart(true);
+                downloadData.setIdItemSelected(R.id.nav_salesUgk);
+                downloadData.execute(url);
+
+            }
+
+        }else {
+            setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_stocks_ua));
+            FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+            xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+        }
+    }
+
+
 
     private void SetOnExitApp() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -259,6 +353,7 @@ public class MainActivity extends AppCompatActivity {
                 downloadData.setMainActivity(this);
                 downloadData.setNameData("salesUGK");
                 downloadData.setOpenStart(true);
+                downloadData.setIdItemSelected(R.id.nav_salesUgk);
                 downloadData.execute(url);
 
         }
