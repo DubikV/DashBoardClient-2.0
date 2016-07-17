@@ -12,7 +12,7 @@ public class SalesUGKTableDTO {
     private double delta3;
     private double delta1;
 
-    public SalesUGKTableDTO(String typeData, int sumMonth, int sumDay, int delta12, int delta3, int delta1) {
+    public SalesUGKTableDTO(String typeData, double sumMonth, double sumDay, double delta12, double delta3, double delta1) {
         this.typeData = typeData;
         this.sumMonth = sumMonth;
         this.sumDay   = sumDay;

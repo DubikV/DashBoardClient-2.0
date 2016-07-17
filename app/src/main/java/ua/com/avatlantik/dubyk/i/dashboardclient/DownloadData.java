@@ -17,7 +17,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKAddDTO;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKTableDTO;
 
 /**
  * Created by i.dubyk on 11.07.2016.
@@ -156,7 +158,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
             dataJsonObj = new JSONObject(strJson);
 
-            ArrayList<SalesUGKDTO> array = new ArrayList<>();
+            ArrayList<SalesUGKDTO> arrayS = new ArrayList<>();
 
             JSONArray SalesUGKDTOarray = dataJsonObj.getJSONArray("salesUGK");
 
@@ -164,10 +166,28 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
                 JSONObject SalesUGK = SalesUGKDTOarray.getJSONObject(i);
 
-                array.add(new SalesUGKDTO(SalesUGK.optString("typeData",""), SalesUGK.optInt("numberDay",0), SalesUGK.optDouble("value",0.0)));
+                arrayS.add(new SalesUGKDTO(SalesUGK.optString("typeData",""), SalesUGK.optInt("numberDay",0), SalesUGK.optDouble("value",0.0)));
             }
 
-            dataDTO.setSalesUGKDTO(array);
+            dataDTO.setSalesUGKDTO(arrayS);
+
+            ArrayList<SalesUGKTableDTO> arrayT = new ArrayList<>();
+
+            JSONArray SalesUGKTableDTOarray = dataJsonObj.getJSONArray("salesUGKTable");
+
+            for (int i = 0; i < SalesUGKDTOarray.length(); i++) {
+
+                JSONObject SalesUGKTable = SalesUGKDTOarray.getJSONObject(i);
+
+                arrayT.add(new SalesUGKTableDTO(SalesUGKTable.optString("typeData",""), SalesUGKTable.optDouble("numberDay",0), SalesUGKTable.optDouble("value",0.0), SalesUGKTable.optDouble("value",0.0),SalesUGKTable.optDouble("value",0.0),SalesUGKTable.optDouble("value",0.0)));
+            }
+
+            dataDTO.setSalesUGKTableDTO(arrayT);
+
+            JSONArray SalesUGKAddDTOarray = dataJsonObj.getJSONArray("salesUGKAdd");
+
+            dataDTO.setSalesUGKAddDTO(new SalesUGKAddDTO(SalesUGKAddDTOarray.optDouble(Integer.parseInt("value"),0.0), SalesUGKAddDTOarray.optDouble(Integer.parseInt("value"),0.0),SalesUGKAddDTOarray.optDouble(Integer.parseInt("value"),0.0),SalesUGKAddDTOarray.optDouble(Integer.parseInt("sd"),0.0)));
+
 
             result = mainActivity.getString(R.string.finish_dowload_data);
 
