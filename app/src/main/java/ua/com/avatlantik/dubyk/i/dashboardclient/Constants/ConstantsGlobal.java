@@ -16,5 +16,14 @@ public class ConstantsGlobal {
     public static final String PLANE_1Q = "1Q";
     public static final String FACT = "fact";
     public static final String NORM = "norm";
+    public static final String QC = "quantityClients";
+    public static final String AZ = "averageClients";
+
+    public static final String PLANE_12S = "12S";
+    public static final String PLANE_3S = "3S";
+    public static final String PLANE_1S = "1S";
+
+    public static final String SALES_GET_NAME = "salesUGK";
+    public static final String SALESMONEY_GET_NAME = "salesMoney";
 
 }

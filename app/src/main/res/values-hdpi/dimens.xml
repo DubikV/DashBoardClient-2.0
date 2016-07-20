@@ -15,11 +15,14 @@
     <dimen name="linerlayout_numbers_down_marginLeft">0dp</dimen>
 
     <dimen name="textView_numbers_big_textsize">15sp</dimen>
+    <dimen name="textView_title_table_big_textsize">13sp</dimen>
+    <dimen name="textView_table_big_textsize">10sp</dimen>
 
     //===graph=============
     <dimen name="graph_legend_textsize">8dp</dimen>
     <dimen name="zero_size">0dp</dimen>
-    <dimen name="axis_textSize">8dp</dimen>
+    <dimen name="axis_y_textSize">8dp</dimen>
+    <dimen name="axis_x_textSize">5dp</dimen>
     <dimen name="dot_valueTextSize">5dp</dimen>
     <dimen name="graph_lineWidth">2dp</dimen>
     <dimen name="graph_lineCircleRadius">2dp</dimen>

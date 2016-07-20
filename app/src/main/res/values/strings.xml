@@ -82,6 +82,8 @@
     <string name="error_authorisation_error">Помилка авторизації</string>
     <string name="error_internet_connecting">Відсутнє зєднання з інтернетом</string>
     <string name="error_connection_server">Зєдання з сервером не встановлено</string>
+    <string name="error_login_null">Не вказано логін</string>
+    <string name="error_server_null">Не вказана адреса серверу</string>
 
     <string name="error_invalid_query">Помилка запиту</string>
     <string name="finish_dowload_data">Завантаження даних виконано успішно</string>

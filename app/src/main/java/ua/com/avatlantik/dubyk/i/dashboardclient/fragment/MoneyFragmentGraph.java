@@ -47,10 +47,10 @@ public class MoneyFragmentGraph extends Fragment{
     private int color_plane_12Q, color_plane_3Q, color_plane_1Q;
     private String first_line, second_line, third_line;
 
-    public static SalesUgkFragmentGraph getInstance() {
+    public static MoneyFragmentGraph getInstance() {
 
         Bundle args = new Bundle();
-        SalesUgkFragmentGraph fragment = new SalesUgkFragmentGraph();
+        MoneyFragmentGraph fragment = new MoneyFragmentGraph();
         fragment.setArguments(args);
         return  fragment;
     }
@@ -71,7 +71,6 @@ public class MoneyFragmentGraph extends Fragment{
 
         setCombineGraphxAxis();
 
-
         startCountAnimation();
 
         setCombineGraphIntroTheView();
@@ -84,54 +83,54 @@ public class MoneyFragmentGraph extends Fragment{
 
         MoneyAddDTO moneyAddDTO = dataDTO.getMoneyAddDTO();
 
-        final Double planeNormUGK = moneyAddDTO.getPlaneNormUGK();
+        final Double planeNorm = moneyAddDTO.getPlaneNorm();
         final Double plane = moneyAddDTO.getPlane();
-        Double fact = moneyAddDTO.getFact();
-        final Double factNormUGK = moneyAddDTO.getFactNormUGK();
+        final Double fact = moneyAddDTO.getFact();
+        final Double factNorm = moneyAddDTO.getFactNorm();
 
         final TextView textView_header_graph = (TextView) view.findViewById(R.id.textView_header_graph);
 
         final ValueAnimator animatorHeaderGraph4 = new ValueAnimator();
-        animatorHeaderGraph4.setObjectValues(0,fact);
+        animatorHeaderGraph4.setObjectValues(0,factNorm.intValue());
         animatorHeaderGraph4.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+String.valueOf(factNormUGK)+"%"+"   "+String.valueOf(plane)+"/"+(int) animation.getAnimatedValue());
+                textView_header_graph.setText("" + getString(R.string.nav_salesMoney_ua) + "   "+String.valueOf(plane)+"%/"+String.valueOf(fact)+"%"+"   "+String.valueOf(planeNorm)+"/"+(int) animation.getAnimatedValue());
 
             }
         });
 
         final ValueAnimator animatorHeaderGraph3 = new ValueAnimator();
-        animatorHeaderGraph3.setObjectValues(0,plane);
+        animatorHeaderGraph3.setObjectValues(0,planeNorm.intValue());
         animatorHeaderGraph3.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+String.valueOf(factNormUGK)+"%"+"   "+(int) animation.getAnimatedValue()+"/0");
-                if (animation.getAnimatedValue()==plane) {
+                textView_header_graph.setText("" + getString(R.string.nav_salesMoney_ua) + "   "+String.valueOf(plane)+"%/"+String.valueOf(fact)+"%"+"   "+(int) animation.getAnimatedValue()+"/0");
+                if ((int)animation.getAnimatedValue()==planeNorm.intValue()) {
                     animatorHeaderGraph4.start();
                 }
             }
         });
 
         final ValueAnimator animatorHeaderGraph2 = new ValueAnimator();
-        animatorHeaderGraph2.setObjectValues(0,factNormUGK);
+        animatorHeaderGraph2.setObjectValues(0,fact.intValue());
         animatorHeaderGraph2.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+(int) animation.getAnimatedValue()+"%"+"   "+"0/0");
-                if (animation.getAnimatedValue()==factNormUGK) {
+                textView_header_graph.setText("" + getString(R.string.nav_salesMoney_ua) + "   "+String.valueOf(plane)+"%/"+(int) animation.getAnimatedValue()+"%"+"   "+"0/0");
+                if ((int)animation.getAnimatedValue()==fact.intValue()) {
                     animatorHeaderGraph3.start();
                 }
             }
         });
 
         ValueAnimator animatorHeaderGraph1 = new ValueAnimator();
-        animatorHeaderGraph1.setObjectValues(0,planeNormUGK);
+        animatorHeaderGraph1.setObjectValues(0,plane.intValue());
         animatorHeaderGraph1.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+(int) animation.getAnimatedValue()+"%/"+"0%"+"   "+"0/0");
-                if (animation.getAnimatedValue()==planeNormUGK) {
+                textView_header_graph.setText("" + getString(R.string.nav_salesMoney_ua) + "   "+(int) animation.getAnimatedValue()+"%/"+"0%"+"   "+"0/0");
+                if ((int)animation.getAnimatedValue()==plane.intValue()) {
                     animatorHeaderGraph2.start();
                 }
             }
@@ -226,16 +225,13 @@ public class MoneyFragmentGraph extends Fragment{
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setDrawGridLines(true);
         leftAxis.setAxisMinValue(getResources().getDimension(R.dimen.zero_size)); // this replaces setStartAtZero(true)
-        leftAxis.setTextSize(getResources().getDimension(R.dimen.axis_textSize));
+        leftAxis.setTextSize(getResources().getDimension(R.dimen.axis_y_textSize));
 
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setAxisMinValue(getResources().getDimension(R.dimen.zero_size));
-        //xAxis.setAxisMaxValue(xAxisList.size());
-        //xAxis.setAxisMaxValue(12f); // Max size
-        //xAxis.setGranularity(5f);   // Division of the scale
-        xAxis.setTextSize(getResources().getDimension(R.dimen.axis_textSize));
+        xAxis.setTextSize(getResources().getDimension(R.dimen.axis_x_textSize));
         xAxis.setDrawGridLines(false);
         xAxis.setLabelCount(xAxisList.size()-1);
         xAxis.setValueFormatter(new AxisValueFormatter() {

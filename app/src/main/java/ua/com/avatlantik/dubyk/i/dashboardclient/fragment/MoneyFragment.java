@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Money.MoneyTableDTO;
@@ -24,10 +25,10 @@ public class MoneyFragment  extends Fragment{
     private DataDTO dataDTO;
     private ArrayList<MoneyTableDTO> moneyTableDTO;
 
-    public static SalesUgkFragment getInstance() {
+    public static MoneyFragment getInstance() {
 
         Bundle args = new Bundle();
-        SalesUgkFragment fragment = new SalesUgkFragment();
+        MoneyFragment fragment = new MoneyFragment();
         fragment.setArguments(args);
         return  fragment;
     }
@@ -54,54 +55,40 @@ public class MoneyFragment  extends Fragment{
     private void setData() {
 
         for (MoneyTableDTO money: moneyTableDTO){
-            if (money.getTypeData().equalsIgnoreCase(getString(R.string.plane_12q_name))){
+            if (money.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_12S)){
                 setDataToView(R.id.textView1_1, money.getSumMonth());
                 setDataToView(R.id.textView1_2, money.getSumDay());
                 setDataToView(R.id.textView1_3, money.getDelta12());
                 setDataToView(R.id.textView1_4, money.getDelta3());
                 setDataToView(R.id.textView1_5, money.getDelta1());
             }
-            if (money.getTypeData().equalsIgnoreCase(getString(R.string.plane_3q_name))){
+            if (money.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_3S)){
                 setDataToView(R.id.textView2_1, money.getSumMonth());
                 setDataToView(R.id.textView2_2, money.getSumDay());
                 setDataToView(R.id.textView2_3, money.getDelta12());
                 setDataToView(R.id.textView2_4, money.getDelta3());
                 setDataToView(R.id.textView2_5, money.getDelta1());
             }
-            if (money.getTypeData().equalsIgnoreCase(getString(R.string.plane_1q_name))){
+            if (money.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_1S)){
                 setDataToView(R.id.textView3_1, money.getSumMonth());
                 setDataToView(R.id.textView3_2, money.getSumDay());
                 setDataToView(R.id.textView3_3, money.getDelta12());
                 setDataToView(R.id.textView3_4, money.getDelta3());
                 setDataToView(R.id.textView3_5, money.getDelta1());
             }
-            if (money.getTypeData().equalsIgnoreCase(getString(R.string.norm_name))){
+            if (money.getTypeData().equalsIgnoreCase(ConstantsGlobal.NORM)){
                 setDataToView(R.id.textView4_1, money.getSumMonth());
                 setDataToView(R.id.textView4_2, money.getSumDay());
                 setDataToView(R.id.textView4_3, money.getDelta12());
                 setDataToView(R.id.textView4_4, money.getDelta3());
                 setDataToView(R.id.textView4_5, money.getDelta1());
             }
-            if (money.getTypeData().equalsIgnoreCase(getString(R.string.fact_name))){
+            if (money.getTypeData().equalsIgnoreCase(ConstantsGlobal.FACT)){
                 setDataToView(R.id.textView5_1, money.getSumMonth());
                 setDataToView(R.id.textView5_2, money.getSumDay());
                 setDataToView(R.id.textView5_3, money.getDelta12());
                 setDataToView(R.id.textView5_4, money.getDelta3());
                 setDataToView(R.id.textView5_5, money.getDelta1());
-            }
-            if (money.getTypeData().equalsIgnoreCase(getString(R.string.quantityClients_name))){
-                setDataToView(R.id.textView6_1, money.getSumMonth());
-                setDataToView(R.id.textView6_2, money.getSumDay());
-                setDataToView(R.id.textView6_3, money.getDelta12());
-                setDataToView(R.id.textView6_4, money.getDelta3());
-                setDataToView(R.id.textView6_5, money.getDelta1());
-            }
-            if (money.getTypeData().equalsIgnoreCase(getString(R.string.averageClients_name))){
-                setDataToView(R.id.textView7_1, money.getSumMonth());
-                setDataToView(R.id.textView7_2, money.getSumDay());
-                setDataToView(R.id.textView7_3, money.getDelta12());
-                setDataToView(R.id.textView7_4, money.getDelta3());
-                setDataToView(R.id.textView7_5, money.getDelta1());
             }
         }
 

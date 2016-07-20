@@ -3,8 +3,10 @@ package ua.com.avatlantik.dubyk.i.dashboardclient.fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -141,14 +143,17 @@ public class SettingsFragment extends Fragment{
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
-        askToDowloadData();
+        if (!settingConnect.isAvtoDownload()) {
 
+            askToDowloadData();
 
-//        Toolbar toolbar = (Toolbar) view.getRootView().findViewById(R.id.toolbar);
-//        toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
-//
-//        NavigationView navigationView = (NavigationView) view.getRootView().findViewById(R.id.nav_view);
-//        navigationView.getMenu().performIdentifierAction(R.id.nav_salesUgk, 0);
+        }else {
+            Toolbar toolbar = (Toolbar) view.getRootView().findViewById(R.id.toolbar);
+            toolbar.setTitle(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
+
+            NavigationView navigationView = (NavigationView) view.getRootView().findViewById(R.id.nav_view);
+            navigationView.getMenu().performIdentifierAction(R.id.nav_salesUgk, 0);
+        }
 
     }
 

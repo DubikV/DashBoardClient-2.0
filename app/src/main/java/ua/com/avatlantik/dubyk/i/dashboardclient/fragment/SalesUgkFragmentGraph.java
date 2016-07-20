@@ -71,7 +71,6 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         setCombineGraphxAxis();
 
-
         startCountAnimation();
 
         setCombineGraphIntroTheView();
@@ -84,54 +83,54 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         SalesUGKAddDTO salesUGKAddDTO = dataDTO.getSalesUGKAddDTO();
 
-        final Double planeNormUGK = salesUGKAddDTO.getPlaneNormUGK();
+        final Double planeNorm = salesUGKAddDTO.getPlaneNorm();
         final Double plane = salesUGKAddDTO.getPlane();
-        Double fact = salesUGKAddDTO.getFact();
-        final Double factNormUGK = salesUGKAddDTO.getFactNormUGK();
+        final Double fact = salesUGKAddDTO.getFact();
+        final Double factNorm = salesUGKAddDTO.getFactNorm();
 
         final TextView textView_header_graph = (TextView) view.findViewById(R.id.textView_header_graph);
 
         final ValueAnimator animatorHeaderGraph4 = new ValueAnimator();
-        animatorHeaderGraph4.setObjectValues(0,fact);
+        animatorHeaderGraph4.setObjectValues(0,factNorm.intValue());
         animatorHeaderGraph4.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph4.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+String.valueOf(factNormUGK)+"%"+"   "+String.valueOf(plane)+"/"+(int) animation.getAnimatedValue());
+                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(plane)+"%/"+String.valueOf(fact)+"%"+"   "+String.valueOf(planeNorm)+"/"+(int) animation.getAnimatedValue());
 
             }
         });
 
         final ValueAnimator animatorHeaderGraph3 = new ValueAnimator();
-        animatorHeaderGraph3.setObjectValues(0,plane);
+        animatorHeaderGraph3.setObjectValues(0,planeNorm.intValue());
         animatorHeaderGraph3.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+String.valueOf(factNormUGK)+"%"+"   "+(int) animation.getAnimatedValue()+"/0");
-                if (animation.getAnimatedValue()==plane) {
+                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(plane)+"%/"+String.valueOf(fact)+"%"+"   "+(int) animation.getAnimatedValue()+"/0");
+                if ((int)animation.getAnimatedValue()==planeNorm.intValue()) {
                     animatorHeaderGraph4.start();
                 }
             }
         });
 
         final ValueAnimator animatorHeaderGraph2 = new ValueAnimator();
-        animatorHeaderGraph2.setObjectValues(0,factNormUGK);
+        animatorHeaderGraph2.setObjectValues(0,fact.intValue());
         animatorHeaderGraph2.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(planeNormUGK)+"%/"+(int) animation.getAnimatedValue()+"%"+"   "+"0/0");
-                if (animation.getAnimatedValue()==factNormUGK) {
+                textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+String.valueOf(plane)+"%/"+(int) animation.getAnimatedValue()+"%"+"   "+"0/0");
+                if ((int)animation.getAnimatedValue()==fact.intValue()) {
                     animatorHeaderGraph3.start();
                 }
             }
         });
 
         ValueAnimator animatorHeaderGraph1 = new ValueAnimator();
-        animatorHeaderGraph1.setObjectValues(0,planeNormUGK);
+        animatorHeaderGraph1.setObjectValues(0,plane.intValue());
         animatorHeaderGraph1.setDuration(ConstantsGlobal.SMALL_TIME);
         animatorHeaderGraph1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 textView_header_graph.setText("" + getString(R.string.nav_salesUgk_ua) + "   "+(int) animation.getAnimatedValue()+"%/"+"0%"+"   "+"0/0");
-                if (animation.getAnimatedValue()==planeNormUGK) {
+                if ((int)animation.getAnimatedValue()==plane.intValue()) {
                     animatorHeaderGraph2.start();
                 }
             }
@@ -226,7 +225,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setDrawGridLines(true);
         leftAxis.setAxisMinValue(getResources().getDimension(R.dimen.zero_size)); // this replaces setStartAtZero(true)
-        leftAxis.setTextSize(getResources().getDimension(R.dimen.axis_textSize));
+        leftAxis.setTextSize(getResources().getDimension(R.dimen.axis_y_textSize));
 
 
         XAxis xAxis = mChart.getXAxis();
@@ -235,7 +234,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         //xAxis.setAxisMaxValue(xAxisList.size());
         //xAxis.setAxisMaxValue(12f); // Max size
         //xAxis.setGranularity(5f);   // Division of the scale
-        xAxis.setTextSize(getResources().getDimension(R.dimen.axis_textSize));
+        xAxis.setTextSize(getResources().getDimension(R.dimen.axis_x_textSize));
         xAxis.setDrawGridLines(false);
         xAxis.setLabelCount(xAxisList.size()-1);
         xAxis.setValueFormatter(new AxisValueFormatter() {

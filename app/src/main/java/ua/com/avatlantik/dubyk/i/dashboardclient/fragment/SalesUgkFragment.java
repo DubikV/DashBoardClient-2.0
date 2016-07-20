@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKTableDTO;
@@ -54,49 +55,49 @@ public class SalesUgkFragment  extends Fragment{
     private void setData() {
 
         for (SalesUGKTableDTO sales: salesUGKTableDTO){
-            if (sales.getTypeData().equalsIgnoreCase(getString(R.string.plane_12q_name))){
+            if (sales.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_12Q)){
                 setDataToView(R.id.textView1_1, sales.getSumMonth());
                 setDataToView(R.id.textView1_2, sales.getSumDay());
                 setDataToView(R.id.textView1_3, sales.getDelta12());
                 setDataToView(R.id.textView1_4, sales.getDelta3());
                 setDataToView(R.id.textView1_5, sales.getDelta1());
             }
-            if (sales.getTypeData().equalsIgnoreCase(getString(R.string.plane_3q_name))){
+            if (sales.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_3Q)){
                 setDataToView(R.id.textView2_1, sales.getSumMonth());
                 setDataToView(R.id.textView2_2, sales.getSumDay());
                 setDataToView(R.id.textView2_3, sales.getDelta12());
                 setDataToView(R.id.textView2_4, sales.getDelta3());
                 setDataToView(R.id.textView2_5, sales.getDelta1());
             }
-            if (sales.getTypeData().equalsIgnoreCase(getString(R.string.plane_1q_name))){
+            if (sales.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_1Q)){
                 setDataToView(R.id.textView3_1, sales.getSumMonth());
                 setDataToView(R.id.textView3_2, sales.getSumDay());
                 setDataToView(R.id.textView3_3, sales.getDelta12());
                 setDataToView(R.id.textView3_4, sales.getDelta3());
                 setDataToView(R.id.textView3_5, sales.getDelta1());
             }
-            if (sales.getTypeData().equalsIgnoreCase(getString(R.string.norm_name))){
+            if (sales.getTypeData().equalsIgnoreCase(ConstantsGlobal.NORM)){
                 setDataToView(R.id.textView4_1, sales.getSumMonth());
                 setDataToView(R.id.textView4_2, sales.getSumDay());
                 setDataToView(R.id.textView4_3, sales.getDelta12());
                 setDataToView(R.id.textView4_4, sales.getDelta3());
                 setDataToView(R.id.textView4_5, sales.getDelta1());
             }
-            if (sales.getTypeData().equalsIgnoreCase(getString(R.string.fact_name))){
+            if (sales.getTypeData().equalsIgnoreCase(ConstantsGlobal.FACT)){
                 setDataToView(R.id.textView5_1, sales.getSumMonth());
                 setDataToView(R.id.textView5_2, sales.getSumDay());
                 setDataToView(R.id.textView5_3, sales.getDelta12());
                 setDataToView(R.id.textView5_4, sales.getDelta3());
                 setDataToView(R.id.textView5_5, sales.getDelta1());
             }
-            if (sales.getTypeData().equalsIgnoreCase(getString(R.string.quantityClients_name))){
+            if (sales.getTypeData().equalsIgnoreCase(ConstantsGlobal.QC)){
                 setDataToView(R.id.textView6_1, sales.getSumMonth());
                 setDataToView(R.id.textView6_2, sales.getSumDay());
                 setDataToView(R.id.textView6_3, sales.getDelta12());
                 setDataToView(R.id.textView6_4, sales.getDelta3());
                 setDataToView(R.id.textView6_5, sales.getDelta1());
             }
-            if (sales.getTypeData().equalsIgnoreCase(getString(R.string.averageClients_name))){
+            if (sales.getTypeData().equalsIgnoreCase(ConstantsGlobal.AZ)){
                 setDataToView(R.id.textView7_1, sales.getSumMonth());
                 setDataToView(R.id.textView7_2, sales.getSumDay());
                 setDataToView(R.id.textView7_3, sales.getDelta12());

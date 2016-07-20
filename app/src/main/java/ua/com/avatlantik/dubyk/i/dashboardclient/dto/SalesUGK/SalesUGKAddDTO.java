@@ -5,24 +5,24 @@ package ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK;
  */
 public class SalesUGKAddDTO {
 
-    private double planeNormUGK;
+    private double planeNorm;
     private double plane;
     private double fact;
-    private double factNormUGK;
+    private double factNorm;
 
-    public SalesUGKAddDTO(double planeNormUGK, double plane, double fact, double factNormUGK) {
-        this.planeNormUGK = planeNormUGK;
+    public SalesUGKAddDTO(double planeNorm, double plane, double fact, double factNorm) {
+        this.planeNorm = planeNorm;
         this.plane = plane;
         this.fact = fact;
-        this.factNormUGK = factNormUGK;
+        this.factNorm = factNorm;
     }
 
-    public double getPlaneNormUGK() {
-        return planeNormUGK;
+    public double getPlaneNorm() {
+        return planeNorm;
     }
 
-    public void setPlaneNormUGK(double planeNormUGK) {
-        this.planeNormUGK = planeNormUGK;
+    public void setPlaneNorm(double planeNorm) {
+        this.planeNorm = planeNorm;
     }
 
     public double getPlane() {
@@ -41,11 +41,11 @@ public class SalesUGKAddDTO {
         this.fact = fact;
     }
 
-    public double getFactNormUGK() {
-        return factNormUGK;
+    public double getFactNorm() {
+        return factNorm;
     }
 
-    public void setFactNormUGK(double factNormUGK) {
-        this.factNormUGK = factNormUGK;
+    public void setFactNorm(double factNorm) {
+        this.factNorm = factNorm;
     }
 }

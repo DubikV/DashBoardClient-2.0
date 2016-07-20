@@ -2,7 +2,6 @@ package ua.com.avatlantik.dubyk.i.dashboardclient;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.support.design.widget.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +15,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Money.MoneyAddDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Money.MoneyDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Money.MoneyTableDTO;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKAddDTO;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKDTO;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKTableDTO;
@@ -84,12 +87,11 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         progressDialog.cancel();
+
         mainActivity.setToastToActivity(result);
 
-
         if(openStart) {
-            NavigationView navigationView = (NavigationView) mainActivity.findViewById(R.id.nav_view);
-            navigationView.getMenu().performIdentifierAction(idItemSelected, 0);
+            mainActivity.setNavigationItemSelected(idItemSelected);
         }
 
 
@@ -141,9 +143,12 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
         dataDTO = DataDTO.getInstance();
 
-        if (nameData.equals("salesUGK")) {
+        if (nameData.equals(ConstantsGlobal.SALES_GET_NAME)) {
 
             return parseSalesUGK(strJson);
+
+        }else if(nameData.equals(ConstantsGlobal.SALESMONEY_GET_NAME)){
+            return parseSalesMoney(strJson);
         }
 
         return "";
@@ -153,14 +158,16 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
         String result;
 
-        JSONObject dataJsonObj = null;
+        JSONArray dataJsonArray = null;
         try {
 
-            dataJsonObj = new JSONObject(strJson);
+            dataJsonArray = new JSONArray(strJson);
 
             ArrayList<SalesUGKDTO> arrayS = new ArrayList<>();
 
-            JSONArray SalesUGKDTOarray = dataJsonObj.getJSONArray("salesUGK");
+            JSONObject SalesUGKObject = dataJsonArray.getJSONObject(0);
+
+            JSONArray SalesUGKDTOarray = SalesUGKObject.getJSONArray("salesUGK");
 
             for (int i = 0; i < SalesUGKDTOarray.length(); i++) {
 
@@ -173,27 +180,86 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
             ArrayList<SalesUGKTableDTO> arrayT = new ArrayList<>();
 
-            JSONArray SalesUGKTableDTOarray = dataJsonObj.getJSONArray("salesUGKTable");
+            JSONObject SalesUGKTableObject = dataJsonArray.getJSONObject(1);
 
-            for (int i = 0; i < SalesUGKDTOarray.length(); i++) {
+            JSONArray SalesUGKTableDTOarray = SalesUGKTableObject.getJSONArray("salesUGKTable");
 
-                JSONObject SalesUGKTable = SalesUGKDTOarray.getJSONObject(i);
+            for (int i = 0; i < SalesUGKTableDTOarray.length(); i++) {
 
-                arrayT.add(new SalesUGKTableDTO(SalesUGKTable.optString("typeData",""), SalesUGKTable.optDouble("numberDay",0), SalesUGKTable.optDouble("value",0.0), SalesUGKTable.optDouble("value",0.0),SalesUGKTable.optDouble("value",0.0),SalesUGKTable.optDouble("value",0.0)));
+                JSONObject SalesUGKTable = SalesUGKTableDTOarray.getJSONObject(i);
+
+                arrayT.add(new SalesUGKTableDTO(SalesUGKTable.optString("typeData",""), SalesUGKTable.optDouble("sumMonth",0), SalesUGKTable.optDouble("sumDay",0.0), SalesUGKTable.optDouble("delta12",0.0),SalesUGKTable.optDouble("delta3",0.0),SalesUGKTable.optDouble("delta1",0.0)));
             }
 
             dataDTO.setSalesUGKTableDTO(arrayT);
 
-            JSONArray SalesUGKAddDTOarray = dataJsonObj.getJSONArray("salesUGKAdd");
+            JSONObject SalesUGKaddObject = dataJsonArray.getJSONObject(2);
 
-            dataDTO.setSalesUGKAddDTO(new SalesUGKAddDTO(SalesUGKAddDTOarray.optDouble(Integer.parseInt("value"),0.0), SalesUGKAddDTOarray.optDouble(Integer.parseInt("value"),0.0),SalesUGKAddDTOarray.optDouble(Integer.parseInt("value"),0.0),SalesUGKAddDTOarray.optDouble(Integer.parseInt("sd"),0.0)));
+            JSONObject SalesUGKAddObject = SalesUGKaddObject.getJSONObject("salesUGKadd");
 
+
+            dataDTO.setSalesUGKAddDTO(new SalesUGKAddDTO(SalesUGKAddObject.optDouble("planeNormUGK",0.0), SalesUGKAddObject.optDouble("plane",0.0),SalesUGKAddObject.optDouble("fact",0.0),SalesUGKAddObject.optDouble("factNormUGK",0.0)));
 
             result = mainActivity.getString(R.string.finish_dowload_data);
 
         } catch (JSONException e) {
             e.printStackTrace();
             result = mainActivity.getString(R.string.error_processing_data);
+        }
+
+        return result;
+    }
+
+    private String parseSalesMoney(String strJson){
+
+        String result;
+
+        try {
+
+            JSONArray dataJsArray = new JSONArray(strJson);
+
+            ArrayList<MoneyDTO> arrayS = new ArrayList<>();
+
+            JSONObject SalesMoneyObject = dataJsArray.getJSONObject(0);
+
+            JSONArray SalesMoneyDTOarray = SalesMoneyObject.getJSONArray("salesMoney");
+
+            for (int i = 0; i < SalesMoneyDTOarray.length(); i++) {
+
+                JSONObject SalesMoney = SalesMoneyDTOarray.getJSONObject(i);
+
+                arrayS.add(new MoneyDTO(SalesMoney.optString("typeData",""), SalesMoney.optInt("numberDay",0), SalesMoney.optDouble("value",0.0)));
+            }
+
+            dataDTO.setMoneyDTO(arrayS);
+
+            ArrayList<MoneyTableDTO> arrayT = new ArrayList<>();
+
+            JSONObject SalesMoneyTableObject = dataJsArray.getJSONObject(1);
+
+            JSONArray moneyTableDTOarray = SalesMoneyTableObject.getJSONArray("salesMoneyTable");
+
+            for (int i = 0; i < moneyTableDTOarray.length(); i++) {
+
+                JSONObject moneyTable = moneyTableDTOarray.getJSONObject(i);
+
+                arrayT.add(new MoneyTableDTO(moneyTable.optString("typeData",""), moneyTable.optDouble("sumMonth",0), moneyTable.optDouble("sumDay",0.0), moneyTable.optDouble("delta12",0.0),moneyTable.optDouble("delta3",0.0),moneyTable.optDouble("delta1",0.0)));
+            }
+
+            dataDTO.setMoneyTableDTO(arrayT);
+
+            JSONObject MoneyaddObject = dataJsArray.getJSONObject(2);
+
+            JSONObject MoneyAddObject = MoneyaddObject.getJSONObject("salesMoneyadd");
+
+
+            dataDTO.setMoneyAddDTO(new MoneyAddDTO(MoneyAddObject.optDouble("planeNormMoney",0.0), MoneyAddObject.optDouble("plane",0.0),MoneyAddObject.optDouble("fact",0.0),MoneyAddObject.optDouble("factNormMoney",0.0)));
+
+            result = mainActivity.getString(R.string.finish_dowload_data);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return mainActivity.getString(R.string.error_processing_data);
         }
 
         return result;

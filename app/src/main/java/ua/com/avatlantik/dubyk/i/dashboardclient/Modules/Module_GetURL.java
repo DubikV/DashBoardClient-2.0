@@ -38,6 +38,17 @@ public class Module_GetURL {
     public String getGetURL(String dataName){
 
         String textURL;
+
+        if(settingsUser.getUserLogin()==null || settingsUser.getUserLogin()==""){
+            mainActivity.setToastToActivity((mainActivity.getString(R.string.error_login_null)));
+            return "";
+        }
+
+        if(settingConnect.getAdressServer()==null || settingConnect.getAdressServer()==""){
+            mainActivity.setToastToActivity((mainActivity.getString(R.string.error_server_null)));
+            return "";
+        }
+
         if(dataName.equals("checkConnection")){
             return "http://" + settingConnect.getAdressServer() + ConstantsGlobal.HTTPSERVICE_1C_NAME + "/" + dataName;
         }else {
@@ -47,6 +58,7 @@ public class Module_GetURL {
     }
 
     private String getusrlogin(){
+
         String usrLog = settingsUser.getUserLogin();
         String arrStr[] = usrLog.split(" ");
         String usrlogin ="";
