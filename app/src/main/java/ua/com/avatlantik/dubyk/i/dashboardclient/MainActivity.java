@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             if(module_getURL.getCheckConnektion()) {
 
                 String url = module_getURL.getGetURL(ConstantsGlobal.SALES_GET_NAME);
-                if(!url.isEmpty() && url!=null){
+                if(url.isEmpty() || url==null){
                     return;
                 }
                 DownloadData downloadData = new DownloadData();
@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
             if(module_getURL.getCheckConnektion()) {
 
                 String url = module_getURL.getGetURL(ConstantsGlobal.SALESMONEY_GET_NAME);
-                if(!url.isEmpty() && url!=null){
+                if(url.isEmpty() || url==null){
                    return;
                 }
                 DownloadData downloadData = new DownloadData();
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             if(module_getURL.getCheckConnektion()) {
 
                 String url = module_getURL.getGetURL("margin");
-                if(!url.isEmpty() && url!=null){
+                if(url.isEmpty() || url==null){
                     return;
                 }
                 DownloadData downloadData = new DownloadData();
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
             if(module_getURL.getCheckConnektion()) {
 
                 String url = module_getURL.getGetURL(ConstantsGlobal.STOCKS_GET_NAME);
-                if(!url.isEmpty() && url!=null){
+                if(url.isEmpty() || url==null){
                     return;
                 }
                 DownloadData downloadData = new DownloadData();
