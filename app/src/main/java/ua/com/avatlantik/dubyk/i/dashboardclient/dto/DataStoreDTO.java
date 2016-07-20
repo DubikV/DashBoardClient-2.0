@@ -21,6 +21,10 @@ public class DataStoreDTO {
     private ArrayList<DataTableDTO> moneyTableDTO;
     private DataAddDTO moneyAddDTO;
 
+    private ArrayList<DataDTO> stoksDTO;
+    private ArrayList<DataTableDTO> stoksTableDTO;
+    private DataAddDTO stoksAddDTO;
+
     private ArrayList<AdditionalInfoDTO> additionalInfoDTO;
 
     private static volatile DataStoreDTO _instance = null;
@@ -101,5 +105,29 @@ public class DataStoreDTO {
 
     public void setMoneyAddDTO(DataAddDTO moneyAddDTO) {
         this.moneyAddDTO = moneyAddDTO;
+    }
+
+    public DataAddDTO getStoksAddDTO() {
+        return stoksAddDTO;
+    }
+
+    public void setStoksAddDTO(DataAddDTO stoksAddDTO) {
+        this.stoksAddDTO = stoksAddDTO;
+    }
+
+    public ArrayList<DataTableDTO> getStoksTableDTO() {
+        return stoksTableDTO;
+    }
+
+    public void setStoksTableDTO(ArrayList<DataTableDTO> stoksTableDTO) {
+        this.stoksTableDTO = stoksTableDTO;
+    }
+
+    public ArrayList<DataDTO> getStoksDTO() {
+        return stoksDTO;
+    }
+
+    public void setStoksDTO(ArrayList<DataDTO> stoksDTO) {
+        this.stoksDTO = stoksDTO;
     }
 }

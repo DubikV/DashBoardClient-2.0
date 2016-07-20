@@ -99,7 +99,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
     try
 
     {
-        URL url = new URL(urlData);
+        URL url = new URL("http://10.0.90.10/DashBoardExchange/hs/DashBoard/stoсks?login=Дубик%20Иван&password=1234567890");//urlData);
 
         urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
@@ -145,7 +145,11 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
             return parseSalesUGK(strJson);
 
         }else if(nameData.equals(ConstantsGlobal.SALESMONEY_GET_NAME)){
+
             return parseSalesMoney(strJson);
+
+        }else if(nameData.equals(ConstantsGlobal.STOCKS_GET_NAME)){
+            return parseStocks(strJson);
         }
 
         return "";
@@ -192,10 +196,10 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
             JSONObject SalesUGKaddObject = dataJsonArray.getJSONObject(2);
 
-            JSONObject SalesUGKAddObject = SalesUGKaddObject.getJSONObject("salesUGKadd");
+            JSONObject SalesUGKAddObject = SalesUGKaddObject.getJSONObject("salesUGKAdd");
 
 
-            dataStoreDTO.setSalesUGKAddDTO(new DataAddDTO(SalesUGKAddObject.optDouble("planeNormUGK",0.0), SalesUGKAddObject.optDouble("plane",0.0),SalesUGKAddObject.optDouble("fact",0.0),SalesUGKAddObject.optDouble("factNormUGK",0.0)));
+            dataStoreDTO.setSalesUGKAddDTO(new DataAddDTO(SalesUGKAddObject.optDouble("planeNorm",0.0), SalesUGKAddObject.optDouble("plane",0.0),SalesUGKAddObject.optDouble("fact",0.0),SalesUGKAddObject.optDouble("factNorm",0.0)));
 
             //result = mainActivity.getString(R.string.finish_dowload_data);
 
@@ -247,10 +251,65 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
             JSONObject MoneyaddObject = dataJsArray.getJSONObject(2);
 
-            JSONObject MoneyAddObject = MoneyaddObject.getJSONObject("salesMoneyadd");
+            JSONObject MoneyAddObject = MoneyaddObject.getJSONObject("salesMoneyAdd");
 
 
-            dataStoreDTO.setMoneyAddDTO(new DataAddDTO(MoneyAddObject.optDouble("planeNormMoney",0.0), MoneyAddObject.optDouble("plane",0.0),MoneyAddObject.optDouble("fact",0.0),MoneyAddObject.optDouble("factNormMoney",0.0)));
+            dataStoreDTO.setMoneyAddDTO(new DataAddDTO(MoneyAddObject.optDouble("planeNorm",0.0), MoneyAddObject.optDouble("plane",0.0),MoneyAddObject.optDouble("fact",0.0),MoneyAddObject.optDouble("factNorm",0.0)));
+
+            //result = mainActivity.getString(R.string.finish_dowload_data);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return mainActivity.getString(R.string.error_processing_data);
+        }
+
+        return result;
+    }
+
+    private String parseStocks(String strJson){
+
+        String result ="";
+
+        try {
+
+            JSONArray dataJsArray = new JSONArray(strJson);
+
+            ArrayList<DataDTO> arrayS = new ArrayList<>();
+
+            JSONObject StocksObject = dataJsArray.getJSONObject(0);
+
+            JSONArray StocksDTOarray = StocksObject.getJSONArray("stocks");
+
+            for (int i = 0; i < StocksDTOarray.length(); i++) {
+
+                JSONObject stock = StocksDTOarray.getJSONObject(i);
+
+                arrayS.add(new DataDTO(stock.optString("typeData",""), stock.optInt("numberDay",0), stock.optDouble("value",0.0)));
+            }
+
+            dataStoreDTO.setStoksDTO(arrayS);
+
+            ArrayList<DataTableDTO> arrayT = new ArrayList<>();
+
+            JSONObject StocksTableObject = dataJsArray.getJSONObject(1);
+
+            JSONArray stoksTableDTOarray = StocksTableObject.getJSONArray("salesMoneyTable");
+
+            for (int i = 0; i < stoksTableDTOarray.length(); i++) {
+
+                JSONObject moneyTable = stoksTableDTOarray.getJSONObject(i);
+
+                arrayT.add(new DataTableDTO(moneyTable.optString("typeData",""), moneyTable.optDouble("sumMonth",0), moneyTable.optDouble("sumDay",0.0), moneyTable.optDouble("delta12",0.0),moneyTable.optDouble("delta3",0.0),moneyTable.optDouble("delta1",0.0)));
+            }
+
+            dataStoreDTO.setStoksTableDTO(arrayT);
+
+            JSONObject StocksAddObject = dataJsArray.getJSONObject(2);
+
+            JSONObject stocksAddObject = StocksAddObject.getJSONObject("salesMoneyAdd");
+
+
+            dataStoreDTO.setStoksAddDTO(new DataAddDTO(stocksAddObject.optDouble("planeNorm",0.0), stocksAddObject.optDouble("plane",0.0),stocksAddObject.optDouble("fact",0.0),stocksAddObject.optDouble("factNorm",0.0)));
 
             //result = mainActivity.getString(R.string.finish_dowload_data);
 

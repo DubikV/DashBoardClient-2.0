@@ -23,7 +23,15 @@ public class ConstantsGlobal {
     public static final String PLANE_3S = "3S";
     public static final String PLANE_1S = "1S";
 
+    public static final String NAME_12Z = "12Z";
+    public static final String NAME_12Zavt = "12Zavt";
+    public static final String NAME_12ZF = "12ZF";
+    public static final String NAME_COST_PLANE = "cost_plane";
+    public static final String NAME_AV_DIR_COSTS = "av_dir_costs";
+    public static final String NAME_TAVT_FACT = "tavt_fact";
+
     public static final String SALES_GET_NAME = "salesUGK";
     public static final String SALESMONEY_GET_NAME = "salesMoney";
+    public static final String STOCKS_GET_NAME = "stocks";
 
 }

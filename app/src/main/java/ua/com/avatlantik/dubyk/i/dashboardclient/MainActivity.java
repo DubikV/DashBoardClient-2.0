@@ -27,6 +27,7 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingConnect;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingsUser;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesMoney;
 import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesUGK;
+import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentStocks;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.InfoFragment;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.SettingsFragment;
 
@@ -210,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         }else if (itemId == R.id.nav_stocks) {
             setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_stocks_ua));
             FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-            xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+            xfragmentTransaction.replace(R.id.containerView,new TabFragmentStocks()).commit();
         }else if (itemId == R.id.nav_info) {
             setToolbarText(getString(R.string.nav_info_ua));
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
@@ -307,13 +308,13 @@ public class MainActivity extends AppCompatActivity {
 
             if(module_getURL.getCheckConnektion()) {
 
-                String url = module_getURL.getGetURL("stocks");
+                String url = module_getURL.getGetURL(ConstantsGlobal.STOCKS_GET_NAME);
                 if(url == ""||url==null){
                     return;
                 }
                 DownloadData downloadData = new DownloadData();
                 downloadData.setMainActivity(this);
-                downloadData.setNameData("stocks");
+                downloadData.setNameData(ConstantsGlobal.STOCKS_GET_NAME);
                 downloadData.setOpenStart(true);
                 downloadData.setIdItemSelected(R.id.nav_stocks);
                 downloadData.execute(url);

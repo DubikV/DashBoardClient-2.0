@@ -58,6 +58,7 @@
     <string name="plane_12q_name">12Q</string>
     <string name="plane_3q_name">3Q</string>
     <string name="plane_1q_name">1Q</string>
+
     <string name="plane_12s_name">12S</string>
     <string name="plane_3s_name">3S</string>
     <string name="plane_1s_name">1S</string>
@@ -66,6 +67,13 @@
     <string name="fact_name">Факт</string>
     <string name="quantityClients_name">Кол.кл</string>
     <string name="averageClients_name">Ср.чек кл</string>
+
+    <string name="name_12z">12Z</string>
+    <string name="name_12Z_avt">12Z авт.</string>
+    <string name="name_12ZF">12ZF</string>
+    <string name="cost_plane">Себ. факт</string>
+    <string name="av_dir_costs">Ср.пр зат(i)</string>
+    <string name="tavt_fact">tавт. факт</string>
 
     <string name="title_Exit">Вихід :</string>
     <string name="questions_Exit">Ви впевнені що хочете вийти ?</string>

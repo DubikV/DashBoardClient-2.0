@@ -19,16 +19,16 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataStoreDTO;
 /**
  * Created by i.dubyk on 24.06.2016.
  */
-public class SalesUgkFragment  extends Fragment{
-    private static  final int LAYOUT = R.layout.fragment_sales_ugk;
+public class StocksFragment extends Fragment{
+    private static  final int LAYOUT = R.layout.fragment_stocks;
     private View view;
     private DataStoreDTO dataStoreDTO;
     private ArrayList<DataTableDTO> dataTableDTOs;
 
-    public static SalesUgkFragment getInstance() {
+    public static StocksFragment getInstance() {
 
         Bundle args = new Bundle();
-        SalesUgkFragment fragment = new SalesUgkFragment();
+        StocksFragment fragment = new StocksFragment();
         fragment.setArguments(args);
         return  fragment;
     }
@@ -55,21 +55,21 @@ public class SalesUgkFragment  extends Fragment{
     private void setData() {
 
         for (DataTableDTO data: dataTableDTOs){
-            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_12Q)){
+            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.NAME_12Z)){
                 setDataToView(R.id.textView1_1, data.getSumMonth());
                 setDataToView(R.id.textView1_2, data.getSumDay());
                 setDataToView(R.id.textView1_3, data.getDelta12());
                 setDataToView(R.id.textView1_4, data.getDelta3());
                 setDataToView(R.id.textView1_5, data.getDelta1());
             }
-            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_3Q)){
+            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.NAME_12Zavt)){
                 setDataToView(R.id.textView2_1, data.getSumMonth());
                 setDataToView(R.id.textView2_2, data.getSumDay());
                 setDataToView(R.id.textView2_3, data.getDelta12());
                 setDataToView(R.id.textView2_4, data.getDelta3());
                 setDataToView(R.id.textView2_5, data.getDelta1());
             }
-            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_1Q)){
+            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.NAME_12ZF)){
                 setDataToView(R.id.textView3_1, data.getSumMonth());
                 setDataToView(R.id.textView3_2, data.getSumDay());
                 setDataToView(R.id.textView3_3, data.getDelta12());
@@ -90,19 +90,26 @@ public class SalesUgkFragment  extends Fragment{
                 setDataToView(R.id.textView5_4, data.getDelta3());
                 setDataToView(R.id.textView5_5, data.getDelta1());
             }
-            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.QC)){
+            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.NAME_COST_PLANE)){
                 setDataToView(R.id.textView6_1, data.getSumMonth());
                 setDataToView(R.id.textView6_2, data.getSumDay());
                 setDataToView(R.id.textView6_3, data.getDelta12());
                 setDataToView(R.id.textView6_4, data.getDelta3());
                 setDataToView(R.id.textView6_5, data.getDelta1());
             }
-            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.AZ)){
+            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.NAME_AV_DIR_COSTS)){
                 setDataToView(R.id.textView7_1, data.getSumMonth());
                 setDataToView(R.id.textView7_2, data.getSumDay());
                 setDataToView(R.id.textView7_3, data.getDelta12());
                 setDataToView(R.id.textView7_4, data.getDelta3());
                 setDataToView(R.id.textView7_5, data.getDelta1());
+            }
+            if (data.getTypeData().equalsIgnoreCase(ConstantsGlobal.NAME_TAVT_FACT)){
+                setDataToView(R.id.textView8_1, data.getSumMonth());
+                setDataToView(R.id.textView8_2, data.getSumDay());
+                setDataToView(R.id.textView8_3, data.getDelta12());
+                setDataToView(R.id.textView8_4, data.getDelta3());
+                setDataToView(R.id.textView8_5, data.getDelta1());
             }
         }
 
