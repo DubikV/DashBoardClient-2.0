@@ -29,9 +29,9 @@ import java.util.ArrayList;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKAddDTO;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Data.DataAddDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Data.DataDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataStoreDTO;
 
 /**
  * Created by i.dubyk on 24.06.2016.
@@ -40,8 +40,8 @@ public class SalesUgkFragmentGraph extends Fragment{
     private static  final int LAYOUT = R.layout.fragment_sales_graph;
     private View view;
     private CombinedChart mChart;
-    private DataDTO dataDTO;
-    private ArrayList<SalesUGKDTO> salesUGK;
+    private DataStoreDTO dataStoreDTO;
+    private ArrayList<DataDTO> salesUGK;
     private ArrayList<String> xAxisList;
     private double plane_12Q, plane_3Q, plane_1Q;
     private int color_plane_12Q, color_plane_3Q, color_plane_1Q;
@@ -60,9 +60,9 @@ public class SalesUgkFragmentGraph extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
 
-        dataDTO = DataDTO.getInstance();
+        dataStoreDTO = DataStoreDTO.getInstance();
 
-        salesUGK = dataDTO.getSalesUGKDTO();
+        salesUGK = dataStoreDTO.getSalesUGKDTO();
 
         if (salesUGK == null){
             Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
@@ -81,7 +81,7 @@ public class SalesUgkFragmentGraph extends Fragment{
 
     private void startCountAnimation() {
 
-        SalesUGKAddDTO salesUGKAddDTO = dataDTO.getSalesUGKAddDTO();
+        DataAddDTO salesUGKAddDTO = dataStoreDTO.getSalesUGKAddDTO();
 
         final Double planeNorm = salesUGKAddDTO.getPlaneNorm();
         final Double plane = salesUGKAddDTO.getPlane();
@@ -144,7 +144,7 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         xAxisList = new ArrayList<>();
         xAxisList.add("0");
-        for (SalesUGKDTO salesUGKDTO : salesUGK) {
+        for (DataDTO salesUGKDTO : salesUGK) {
             if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
                 xAxisList.add(String.valueOf(salesUGKDTO.getNumberDay()));
                 plane_12Q = salesUGKDTO.getValye();
@@ -302,7 +302,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, 0));
-        for (SalesUGKDTO salesUGKDTO: salesUGK)
+        for (DataDTO salesUGKDTO: salesUGK)
             if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.NORM)) {
                 entries.add(new Entry(salesUGKDTO.getNumberDay(), (float)salesUGKDTO.getValye()));
             }
@@ -328,7 +328,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float)plane_12Q));
-        for (SalesUGKDTO salesUGKDTO: salesUGK) {
+        for (DataDTO salesUGKDTO: salesUGK) {
             if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
                 entries.add(new Entry(salesUGKDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)salesUGKDTO.getValye()));
             }
@@ -352,7 +352,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float)plane_3Q));
-        for (SalesUGKDTO salesUGKDTO: salesUGK)
+        for (DataDTO salesUGKDTO: salesUGK)
             if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_3Q)) {
                 entries.add(new Entry(salesUGKDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)salesUGKDTO.getValye()));
             }
@@ -374,7 +374,7 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float) plane_1Q));
-        for (SalesUGKDTO salesUGKDTO: salesUGK)
+        for (DataDTO salesUGKDTO: salesUGK)
             if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_1Q)) {
                 entries.add(new Entry(salesUGKDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)salesUGKDTO.getValye()));
             }
@@ -397,7 +397,7 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<BarEntry> entries1 = new ArrayList<BarEntry>();
 
-        for (SalesUGKDTO salesUGKDTO: salesUGK)
+        for (DataDTO salesUGKDTO: salesUGK)
             if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.FACT)) {
                 entries1.add(new BarEntry(salesUGKDTO.getNumberDay(), (float)salesUGKDTO.getValye()));
             }

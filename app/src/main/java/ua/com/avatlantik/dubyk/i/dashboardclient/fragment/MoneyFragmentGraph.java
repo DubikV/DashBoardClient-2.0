@@ -29,9 +29,9 @@ import java.util.ArrayList;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Money.MoneyAddDTO;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Money.MoneyDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Data.DataAddDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Data.DataDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataStoreDTO;
 
 /**
  * Created by i.dubyk on 24.06.2016.
@@ -40,8 +40,8 @@ public class MoneyFragmentGraph extends Fragment{
     private static  final int LAYOUT = R.layout.fragment_sales_graph;
     private View view;
     private CombinedChart mChart;
-    private DataDTO dataDTO;
-    private ArrayList<MoneyDTO> money;
+    private DataStoreDTO dataStoreDTO;
+    private ArrayList<DataDTO> money;
     private ArrayList<String> xAxisList;
     private double plane_12Q, plane_3Q, plane_1Q;
     private int color_plane_12Q, color_plane_3Q, color_plane_1Q;
@@ -60,9 +60,9 @@ public class MoneyFragmentGraph extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
 
-        dataDTO = DataDTO.getInstance();
+        dataStoreDTO = DataStoreDTO.getInstance();
 
-        money = dataDTO.getMoneyDTO();
+        money = dataStoreDTO.getMoneyDTO();
 
         if (money == null){
             Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
@@ -81,7 +81,7 @@ public class MoneyFragmentGraph extends Fragment{
 
     private void startCountAnimation() {
 
-        MoneyAddDTO moneyAddDTO = dataDTO.getMoneyAddDTO();
+        DataAddDTO moneyAddDTO = dataStoreDTO.getMoneyAddDTO();
 
         final Double planeNorm = moneyAddDTO.getPlaneNorm();
         final Double plane = moneyAddDTO.getPlane();
@@ -144,7 +144,7 @@ public class MoneyFragmentGraph extends Fragment{
 
         xAxisList = new ArrayList<>();
         xAxisList.add("0");
-        for (MoneyDTO moneyDTO : money) {
+        for (DataDTO moneyDTO : money) {
             if (moneyDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
                 xAxisList.add(String.valueOf(moneyDTO.getNumberDay()));
                 plane_12Q = moneyDTO.getValye();
@@ -299,7 +299,7 @@ public class MoneyFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, 0));
-        for (MoneyDTO moneyDTO: money)
+        for (DataDTO moneyDTO: money)
             if(moneyDTO.getTypeData().equals(ConstantsGlobal.NORM)) {
                 entries.add(new Entry(moneyDTO.getNumberDay(), (float)moneyDTO.getValye()));
             }
@@ -325,7 +325,7 @@ public class MoneyFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float)plane_12Q));
-        for (MoneyDTO moneyDTO: money) {
+        for (DataDTO moneyDTO: money) {
             if (moneyDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
                 entries.add(new Entry(moneyDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)moneyDTO.getValye()));
             }
@@ -349,7 +349,7 @@ public class MoneyFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float)plane_3Q));
-        for (MoneyDTO moneyDTO: money)
+        for (DataDTO moneyDTO: money)
             if(moneyDTO.getTypeData().equals(ConstantsGlobal.PLANE_3Q)) {
                 entries.add(new Entry(moneyDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)moneyDTO.getValye()));
             }
@@ -371,7 +371,7 @@ public class MoneyFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float) plane_1Q));
-        for (MoneyDTO moneyDTO: money)
+        for (DataDTO moneyDTO: money)
             if(moneyDTO.getTypeData().equals(ConstantsGlobal.PLANE_1Q)) {
                 entries.add(new Entry(moneyDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)moneyDTO.getValye()));
             }
@@ -394,7 +394,7 @@ public class MoneyFragmentGraph extends Fragment{
 
         ArrayList<BarEntry> entries1 = new ArrayList<BarEntry>();
 
-        for (MoneyDTO moneyDTO: money)
+        for (DataDTO moneyDTO: money)
             if(moneyDTO.getTypeData().equals(ConstantsGlobal.FACT)) {
                 entries1.add(new BarEntry(moneyDTO.getNumberDay(), (float)moneyDTO.getValye()));
             }

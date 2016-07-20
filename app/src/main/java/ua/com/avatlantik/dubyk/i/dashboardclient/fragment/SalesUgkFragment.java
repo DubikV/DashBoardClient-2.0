@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataDTO;
-import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKTableDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Data.DataTableDTO;
+import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataStoreDTO;
 
 /**
  * Created by i.dubyk on 24.06.2016.
@@ -22,8 +22,8 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.dto.SalesUGK.SalesUGKTableDTO;
 public class SalesUgkFragment  extends Fragment{
     private static  final int LAYOUT = R.layout.fragment_sales_ugk;
     private View view;
-    private DataDTO dataDTO;
-    private ArrayList<SalesUGKTableDTO> salesUGKTableDTO;
+    private DataStoreDTO dataStoreDTO;
+    private ArrayList<DataTableDTO> salesUGKTableDTO;
 
     public static SalesUgkFragment getInstance() {
 
@@ -38,9 +38,9 @@ public class SalesUgkFragment  extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
 
-        dataDTO = DataDTO.getInstance();
+        dataStoreDTO = DataStoreDTO.getInstance();
 
-        salesUGKTableDTO = dataDTO.getSalesUGKTableDTO();
+        salesUGKTableDTO = dataStoreDTO.getSalesUGKTableDTO();
 
         if (salesUGKTableDTO == null){
             Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
@@ -54,7 +54,7 @@ public class SalesUgkFragment  extends Fragment{
 
     private void setData() {
 
-        for (SalesUGKTableDTO sales: salesUGKTableDTO){
+        for (DataTableDTO sales: salesUGKTableDTO){
             if (sales.getTypeData().equalsIgnoreCase(ConstantsGlobal.PLANE_12Q)){
                 setDataToView(R.id.textView1_1, sales.getSumMonth());
                 setDataToView(R.id.textView1_2, sales.getSumDay());
