@@ -39,12 +39,12 @@ public class Module_GetURL {
 
         String textURL;
 
-        if(settingsUser.getUserLogin()==null || settingsUser.getUserLogin()==""){
+        if(settingsUser.getUserLogin()==null || settingsUser.getUserLogin().isEmpty()){
             mainActivity.setToastToActivity((mainActivity.getString(R.string.error_login_null)));
             return "";
         }
 
-        if(settingConnect.getAdressServer()==null || settingConnect.getAdressServer()==""){
+        if(settingConnect.getAdressServer()==null || settingConnect.getAdressServer().isEmpty()){
             mainActivity.setToastToActivity((mainActivity.getString(R.string.error_server_null)));
             return "";
         }

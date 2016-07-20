@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             if(module_getURL.getCheckConnektion()) {
 
                 String url = module_getURL.getGetURL(ConstantsGlobal.SALES_GET_NAME);
-                if(url == ""||url==null){
+                if(!url.isEmpty() && url!=null){
                     return;
                 }
                 DownloadData downloadData = new DownloadData();
@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
             if(module_getURL.getCheckConnektion()) {
 
                 String url = module_getURL.getGetURL(ConstantsGlobal.SALESMONEY_GET_NAME);
-                if(url == ""||url==null){
+                if(!url.isEmpty() && url!=null){
                    return;
                 }
                 DownloadData downloadData = new DownloadData();
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             if(module_getURL.getCheckConnektion()) {
 
                 String url = module_getURL.getGetURL("margin");
-                if(url == ""||url==null){
+                if(!url.isEmpty() && url!=null){
                     return;
                 }
                 DownloadData downloadData = new DownloadData();
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
             if(module_getURL.getCheckConnektion()) {
 
                 String url = module_getURL.getGetURL(ConstantsGlobal.STOCKS_GET_NAME);
-                if(url == ""||url==null){
+                if(!url.isEmpty() && url!=null){
                     return;
                 }
                 DownloadData downloadData = new DownloadData();
@@ -376,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
             String url ="";
 
             url = module_getURL.getGetURL(ConstantsGlobal.SALES_GET_NAME);
-            if(url != ""||url!=null) {
+            if(!url.isEmpty() && url!=null) {
                 DownloadData downloadDataSales = new DownloadData();
                 downloadDataSales.setMainActivity(this);
                 downloadDataSales.setNameData(ConstantsGlobal.SALES_GET_NAME);
@@ -385,7 +385,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             url = module_getURL.getGetURL(ConstantsGlobal.SALESMONEY_GET_NAME);
-            if(url != ""||url!=null) {
+            if(!url.isEmpty() && url!=null) {
                 DownloadData downloadDataMoney = new DownloadData();
                 downloadDataMoney.setMainActivity(this);
                 downloadDataMoney.setNameData(ConstantsGlobal.SALESMONEY_GET_NAME);

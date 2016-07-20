@@ -99,7 +99,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
     try
 
     {
-        URL url = new URL("http://10.0.90.10/DashBoardExchange/hs/DashBoard/stoсks?login=Дубик%20Иван&password=1234567890");//urlData);
+        URL url = new URL(urlData);
 
         urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
