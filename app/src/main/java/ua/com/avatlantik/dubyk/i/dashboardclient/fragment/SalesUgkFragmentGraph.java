@@ -41,7 +41,7 @@ public class SalesUgkFragmentGraph extends Fragment{
     private View view;
     private CombinedChart mChart;
     private DataStoreDTO dataStoreDTO;
-    private ArrayList<DataDTO> salesUGK;
+    private ArrayList<DataDTO> dataDTOs;
     private ArrayList<String> xAxisList;
     private double plane_12Q, plane_3Q, plane_1Q;
     private int color_plane_12Q, color_plane_3Q, color_plane_1Q;
@@ -62,9 +62,9 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         dataStoreDTO = DataStoreDTO.getInstance();
 
-        salesUGK = dataStoreDTO.getSalesUGKDTO();
+        dataDTOs = dataStoreDTO.getSalesUGKDTO();
 
-        if (salesUGK == null){
+        if (dataDTOs == null){
             Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
             return view;
         }
@@ -81,12 +81,12 @@ public class SalesUgkFragmentGraph extends Fragment{
 
     private void startCountAnimation() {
 
-        DataAddDTO salesUGKAddDTO = dataStoreDTO.getSalesUGKAddDTO();
+        DataAddDTO dataAddDTO = dataStoreDTO.getSalesUGKAddDTO();
 
-        final Double planeNorm = salesUGKAddDTO.getPlaneNorm();
-        final Double plane = salesUGKAddDTO.getPlane();
-        final Double fact = salesUGKAddDTO.getFact();
-        final Double factNorm = salesUGKAddDTO.getFactNorm();
+        final Double planeNorm = dataAddDTO.getPlaneNorm();
+        final Double plane = dataAddDTO.getPlane();
+        final Double fact = dataAddDTO.getFact();
+        final Double factNorm = dataAddDTO.getFactNorm();
 
         final TextView textView_header_graph = (TextView) view.findViewById(R.id.textView_header_graph);
 
@@ -144,16 +144,16 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         xAxisList = new ArrayList<>();
         xAxisList.add("0");
-        for (DataDTO salesUGKDTO : salesUGK) {
-            if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
-                xAxisList.add(String.valueOf(salesUGKDTO.getNumberDay()));
-                plane_12Q = salesUGKDTO.getValye();
+        for (DataDTO dataDTO : dataDTOs) {
+            if (dataDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
+                xAxisList.add(String.valueOf(dataDTO.getNumberDay()));
+                plane_12Q = dataDTO.getValye();
             }
-            if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_3Q)) {
-                plane_3Q = salesUGKDTO.getValye();
+            if (dataDTO.getTypeData().equals(ConstantsGlobal.PLANE_3Q)) {
+                plane_3Q = dataDTO.getValye();
             }
-            if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_1Q)) {
-                plane_1Q = salesUGKDTO.getValye();
+            if (dataDTO.getTypeData().equals(ConstantsGlobal.PLANE_1Q)) {
+                plane_1Q = dataDTO.getValye();
             }
         }
 
@@ -302,9 +302,9 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, 0));
-        for (DataDTO salesUGKDTO: salesUGK)
-            if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.NORM)) {
-                entries.add(new Entry(salesUGKDTO.getNumberDay(), (float)salesUGKDTO.getValye()));
+        for (DataDTO dataDTO: dataDTOs)
+            if(dataDTO.getTypeData().equals(ConstantsGlobal.NORM)) {
+                entries.add(new Entry(dataDTO.getNumberDay(), (float)dataDTO.getValye()));
             }
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.norm_name));
@@ -328,9 +328,9 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float)plane_12Q));
-        for (DataDTO salesUGKDTO: salesUGK) {
-            if (salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
-                entries.add(new Entry(salesUGKDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)salesUGKDTO.getValye()));
+        for (DataDTO dataDTO: dataDTOs) {
+            if (dataDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
+                entries.add(new Entry(dataDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)dataDTO.getValye()));
             }
         }
 
@@ -352,9 +352,9 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float)plane_3Q));
-        for (DataDTO salesUGKDTO: salesUGK)
-            if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_3Q)) {
-                entries.add(new Entry(salesUGKDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)salesUGKDTO.getValye()));
+        for (DataDTO dataDTO: dataDTOs)
+            if(dataDTO.getTypeData().equals(ConstantsGlobal.PLANE_3Q)) {
+                entries.add(new Entry(dataDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)dataDTO.getValye()));
             }
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.plane_3q_name));
@@ -374,9 +374,9 @@ public class SalesUgkFragmentGraph extends Fragment{
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         entries.add(new Entry(0, (float) plane_1Q));
-        for (DataDTO salesUGKDTO: salesUGK)
-            if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.PLANE_1Q)) {
-                entries.add(new Entry(salesUGKDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)salesUGKDTO.getValye()));
+        for (DataDTO dataDTO: dataDTOs)
+            if(dataDTO.getTypeData().equals(ConstantsGlobal.PLANE_1Q)) {
+                entries.add(new Entry(dataDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)dataDTO.getValye()));
             }
 
         LineDataSet set = new LineDataSet(entries, getString(R.string.plane_1q_name));
@@ -397,9 +397,9 @@ public class SalesUgkFragmentGraph extends Fragment{
 
         ArrayList<BarEntry> entries1 = new ArrayList<BarEntry>();
 
-        for (DataDTO salesUGKDTO: salesUGK)
-            if(salesUGKDTO.getTypeData().equals(ConstantsGlobal.FACT)) {
-                entries1.add(new BarEntry(salesUGKDTO.getNumberDay(), (float)salesUGKDTO.getValye()));
+        for (DataDTO dataDTO: dataDTOs)
+            if(dataDTO.getTypeData().equals(ConstantsGlobal.FACT)) {
+                entries1.add(new BarEntry(dataDTO.getNumberDay(), (float)dataDTO.getValye()));
             }
 
         BarDataSet set1 = new BarDataSet(entries1, getString(R.string.fact_name));
