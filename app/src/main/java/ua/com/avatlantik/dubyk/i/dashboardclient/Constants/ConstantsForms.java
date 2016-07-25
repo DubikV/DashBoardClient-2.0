@@ -17,16 +17,4 @@ public class ConstantsForms {
     public static final String MIDDLE_SIZE_NAME = "middleSize";
     public static final String SMALL_SIZE_NAME ="smallSize";
 
-    // Size Display ---------------------------------
-    public static int DISPLAY_WIDHT = 0;
-    public static int DISPLAY_HEIGHT = 0;
-
-    public static final double COEF_SIZE_WEGHT_4 = 0.003125;
-    public static final double COEF_SIZE_WEGHT_5 = 0.003906;
-    public static final double COEF_SIZE_WEGHT_10 = 0.007812;
-    public static final double COEF_SIZE_WEGHT_12 = 0.009375;
-    public static final double COEF_SIZE_WEGHT_13 = 0.010156;
-    public static final double COEF_SIZE_WEGHT_14 = 0.010937;
-    public static final double COEF_SIZE_WEGHT_15 = 0.011718;
-
 }

@@ -30,8 +30,11 @@ public class ConstantsGlobal {
     public static final String NAME_AV_DIR_COSTS = "av_dir_costs";
     public static final String NAME_TAVT_FACT = "tavt_fact";
 
+    public static final String NAME_PLANE_STOCKS = "plane_stoks";
+    public static final String NAME_STOCKS_UGK = "stocksUGK";
+
     public static final String SALES_GET_NAME = "salesUGK";
     public static final String SALESMONEY_GET_NAME = "salesMoney";
-    public static final String STOCKS_GET_NAME = "stocks";
+    public static final String STOCKS_GET_NAME = "stocksGet";
 
 }

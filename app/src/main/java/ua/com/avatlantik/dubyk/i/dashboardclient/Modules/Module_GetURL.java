@@ -4,9 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.MainActivity;
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
@@ -49,38 +46,33 @@ public class Module_GetURL {
             return "";
         }
 
-        if(dataName.equals("checkConnection")){
-            return "http://" + settingConnect.getAdressServer() + ConstantsGlobal.HTTPSERVICE_1C_NAME + "/" + dataName;
-        }else {
-            return "http://" + settingConnect.getAdressServer() + ConstantsGlobal.HTTPSERVICE_1C_NAME + "/" + dataName + "?login=" + getusrlogin() + "&password=" + settingsUser.getUserPassword();
-        }
+        return "http://" + settingConnect.getAdressServer() + ConstantsGlobal.HTTPSERVICE_1C_NAME + "/" + dataName;
 
     }
 
-    private String getusrlogin(){
+    public String getusrlogin(){
 
         String usrLog = settingsUser.getUserLogin();
-        String arrStr[] = usrLog.split(" ");
-        String usrlogin ="";
-        for (int i =0; i< arrStr.length; i++){
-            if(i==arrStr.length-1){
-                try {
-                    usrlogin = usrlogin+ URLEncoder.encode(arrStr[i], "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    usrlogin = usrlogin+ arrStr[i];
-                }
-                continue;
-            }
-            try {
-                usrlogin = usrlogin+ URLEncoder.encode(arrStr[i], "UTF-8")+"%20";
-            } catch (UnsupportedEncodingException e) {
-                usrlogin = usrlogin+arrStr[i]+"%20";
-            }
-        }
-
-        return usrlogin;
+//        String usrlogin ="";
+//        try {
+//            usrlogin = URLEncoder.encode(usrLog, "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            usrlogin = usrLog;
+//        }
+        return usrLog;
     }
 
+    public String getusrPassword(){
+
+        String usrPas = settingsUser.getUserPassword();
+//        String usrPasw ="";
+//        try {
+//            usrPasw = URLEncoder.encode(usrPas, "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            usrPasw = usrPas;
+//        }
+        return usrPas;
+    }
 
     public boolean getCheckConnektion() {
 

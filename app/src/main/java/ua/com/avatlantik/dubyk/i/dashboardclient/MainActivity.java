@@ -2,7 +2,6 @@ package ua.com.avatlantik.dubyk.i.dashboardclient;
 
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -12,22 +11,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsForms;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_GetURL;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_ReadWrite_Data;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingConnect;
 import ua.com.avatlantik.dubyk.i.dashboardclient.Settings.SettingsUser;
-import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesMoney;
-import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentSalesUGK;
-import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragmentStocks;
+import ua.com.avatlantik.dubyk.i.dashboardclient.adapter.TabFragment;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.InfoFragment;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.SettingsFragment;
 
@@ -39,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private FragmentManager mFragmentManager;
-    private FragmentTransaction mFragmentTransaction;
     private Module_ReadWrite_Data module_readWrite_data;
     private Module_GetURL module_getURL;
     private SettingConnect settingConnect;
@@ -63,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         initNavigationView();
 
         initTabs();
-
-        setDisplaySizeInConstants();
 
     }
 
@@ -112,9 +104,7 @@ public class MainActivity extends AppCompatActivity {
     private void initTabs() {
 
         mFragmentManager = getSupportFragmentManager();
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView, new TabFragmentSalesUGK()).commit();
-
+        onNavigationItemSelectedSalesUGK();
    }
 
     private void initNavigationView() {
@@ -198,20 +188,20 @@ public class MainActivity extends AppCompatActivity {
         if (itemId == R.id.nav_salesUgk) {
             setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_salesUgk_ua));
             FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-            xfragmentTransaction.replace(R.id.containerView, new TabFragmentSalesUGK()).commit();
+            xfragmentTransaction.replace(R.id.containerView, new TabFragment(ConstantsGlobal.SALES_GET_NAME)).commit();
         }else if (itemId == R.id.nav_salesMoney) {
             setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_salesMoney_ua));
             FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-            xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+            xfragmentTransaction.replace(R.id.containerView,new TabFragment(ConstantsGlobal.SALESMONEY_GET_NAME)).commit();
         }else if (itemId == R.id.nav_margin) {
             setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_margin_ua));
             FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-            xfragmentTransaction.replace(R.id.containerView,new TabFragmentSalesMoney()).commit();
+            xfragmentTransaction.replace(R.id.containerView,new TabFragment(ConstantsGlobal.SALESMONEY_GET_NAME)).commit();
             return;
         }else if (itemId == R.id.nav_stocks) {
             setToolbarText(getString(R.string.app_name) + ": " + getString(R.string.nav_stocks_ua));
             FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-            xfragmentTransaction.replace(R.id.containerView,new TabFragmentStocks()).commit();
+            xfragmentTransaction.replace(R.id.containerView,new TabFragment(ConstantsGlobal.STOCKS_GET_NAME)).commit();
         }else if (itemId == R.id.nav_info) {
             setToolbarText(getString(R.string.nav_info_ua));
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
@@ -351,14 +341,6 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
-    public void setDisplaySizeInConstants() {
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        ConstantsForms.DISPLAY_WIDHT = size.x;
-        ConstantsForms.DISPLAY_HEIGHT = size.y;
-    }
-
     @Override
     public void onBackPressed() {
         try{
@@ -389,6 +371,14 @@ public class MainActivity extends AppCompatActivity {
                 DownloadData downloadDataMoney = new DownloadData();
                 downloadDataMoney.setMainActivity(this);
                 downloadDataMoney.setNameData(ConstantsGlobal.SALESMONEY_GET_NAME);
+                downloadDataMoney.setOpenStart(false);
+                downloadDataMoney.execute(url);
+            }
+            url = module_getURL.getGetURL(ConstantsGlobal.STOCKS_GET_NAME);
+            if(!url.isEmpty() && url!=null) {
+                DownloadData downloadDataMoney = new DownloadData();
+                downloadDataMoney.setMainActivity(this);
+                downloadDataMoney.setNameData(ConstantsGlobal.STOCKS_GET_NAME);
                 downloadDataMoney.setOpenStart(false);
                 downloadDataMoney.execute(url);
             }

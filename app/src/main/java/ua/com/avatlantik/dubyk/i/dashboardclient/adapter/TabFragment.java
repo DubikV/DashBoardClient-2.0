@@ -11,11 +11,15 @@ import android.view.ViewGroup;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.R;
 
-public class TabFragmentSalesMoney extends Fragment {
+public class TabFragment extends Fragment {
 
     private static TabLayout tabLayout;
     private static ViewPager viewPager;
+    private String nameData;
 
+    public TabFragment(String nameData) {
+        this.nameData = nameData;
+    }
 
     @Nullable
     @Override
@@ -25,7 +29,7 @@ public class TabFragmentSalesMoney extends Fragment {
         tabLayout = (TabLayout) x.findViewById(R.id.tabLayout);
         viewPager = (ViewPager) x.findViewById(R.id.vievPager);
 
-        TabPageSalesMoneyFragmentAdapter adapter = new TabPageSalesMoneyFragmentAdapter((getChildFragmentManager()));
+        TabPageFragmentAdapter adapter = new TabPageFragmentAdapter((getChildFragmentManager()), nameData);
         viewPager.setAdapter(adapter);
 
         tabLayout.post(new Runnable() {

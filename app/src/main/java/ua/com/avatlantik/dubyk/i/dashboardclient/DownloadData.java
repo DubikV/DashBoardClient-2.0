@@ -2,6 +2,7 @@ package ua.com.avatlantik.dubyk.i.dashboardclient;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Base64;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
+import ua.com.avatlantik.dubyk.i.dashboardclient.Modules.Module_GetURL;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Data.DataAddDTO;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Data.DataDTO;
 import ua.com.avatlantik.dubyk.i.dashboardclient.dto.Data.DataTableDTO;
@@ -102,11 +104,26 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
         URL url = new URL(urlData);
 
         urlConnection = (HttpURLConnection) url.openConnection();
+
+        Module_GetURL module_getURL = new Module_GetURL();
+
         urlConnection.setRequestMethod("GET");
         urlConnection.setUseCaches(false);
         urlConnection.setConnectTimeout(10000);
+        urlConnection.addRequestProperty ("Authorization", "Basic " + Base64.encodeToString((module_getURL.getusrlogin()+":"+module_getURL.getusrPassword()).getBytes(), Base64.NO_WRAP));
         urlConnection.connect();
-        int status = urlConnection.getResponseCode();
+
+        int status = 408;
+
+        try {
+            // Will throw IOException if server responds with 401.
+            status = urlConnection.getResponseCode();
+        } catch (IOException e) {
+            // Will return 401, because now connection has the correct internal state.
+            status = urlConnection.getResponseCode();
+        }
+
+        //int status = urlConnection.getResponseCode();
 
         switch (status) {
             case 400:
@@ -125,6 +142,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
                 }
                 reader.close();
                 resultJson = buffer.toString();
+                urlConnection.disconnect();
         }
     } catch (MalformedURLException e) {
         e.printStackTrace();
@@ -293,7 +311,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
             JSONObject StocksTableObject = dataJsArray.getJSONObject(1);
 
-            JSONArray stoksTableDTOarray = StocksTableObject.getJSONArray("salesMoneyTable");
+            JSONArray stoksTableDTOarray = StocksTableObject.getJSONArray("stocksTable");
 
             for (int i = 0; i < stoksTableDTOarray.length(); i++) {
 
@@ -306,7 +324,7 @@ public class DownloadData extends AsyncTask<String, Integer, String> {
 
             JSONObject StocksAddObject = dataJsArray.getJSONObject(2);
 
-            JSONObject stocksAddObject = StocksAddObject.getJSONObject("salesMoneyAdd");
+            JSONObject stocksAddObject = StocksAddObject.getJSONObject("stocksAdd");
 
 
             dataStoreDTO.setStoksAddDTO(new DataAddDTO(stocksAddObject.optDouble("planeNorm",0.0), stocksAddObject.optDouble("plane",0.0),stocksAddObject.optDouble("fact",0.0),stocksAddObject.optDouble("factNorm",0.0)));

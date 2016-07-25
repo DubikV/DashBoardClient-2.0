@@ -43,9 +43,7 @@ public class StocksFragmentGraph extends Fragment{
     private DataStoreDTO dataStoreDTO;
     private ArrayList<DataDTO> dataDTOs;
     private ArrayList<String> xAxisList;
-    private double plane_12Q, plane_3Q, plane_1Q;
-    private int color_plane_12Q, color_plane_3Q, color_plane_1Q;
-    private String first_line, second_line, third_line;
+    private double stocks_ugk, plane_stocks;
 
     public static StocksFragmentGraph getInstance() {
 
@@ -62,7 +60,7 @@ public class StocksFragmentGraph extends Fragment{
 
         dataStoreDTO = DataStoreDTO.getInstance();
 
-        dataDTOs = dataStoreDTO.getSalesUGKDTO();
+        dataDTOs = dataStoreDTO.getStoksDTO();
 
         if (dataDTOs == null){
             Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
@@ -81,7 +79,7 @@ public class StocksFragmentGraph extends Fragment{
 
     private void startCountAnimation() {
 
-        DataAddDTO dataAddDTO = dataStoreDTO.getSalesUGKAddDTO();
+        DataAddDTO dataAddDTO = dataStoreDTO.getStoksAddDTO();
 
         final Double plane = dataAddDTO.getPlane();
         final Double fact = dataAddDTO.getFact();
@@ -119,8 +117,14 @@ public class StocksFragmentGraph extends Fragment{
         xAxisList = new ArrayList<>();
         xAxisList.add("0");
         for (DataDTO dataDTO : dataDTOs) {
-            if (dataDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
+            if (dataDTO.getTypeData().equals(ConstantsGlobal.NAME_PLANE_STOCKS)) {
                 xAxisList.add(String.valueOf(dataDTO.getNumberDay()));
+                if(plane_stocks==0){
+                    plane_stocks = dataDTO.getValye();
+                }
+            }
+            if (dataDTO.getTypeData().equals(ConstantsGlobal.NAME_STOCKS_UGK)&& stocks_ugk==0) {
+                stocks_ugk = dataDTO.getValye();
             }
         }
     }
@@ -195,57 +199,57 @@ public class StocksFragmentGraph extends Fragment{
 
         LineData d = new LineData();
 
-        d.addDataSet(generateLineData12Q());
-        d.addDataSet(generateLineDataNorm());
+        d.addDataSet(generateLineDataPlaneStocks());
+        d.addDataSet(generateLineDataStocksUGK());
 
         return d;
     }
 
-    private LineDataSet generateLineDataNorm() {
+    private LineDataSet generateLineDataStocksUGK() {
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
-        entries.add(new Entry(0, 0));
+        entries.add(new Entry(0, (float)stocks_ugk));
         for (DataDTO dataDTO: dataDTOs)
-            if(dataDTO.getTypeData().equals(ConstantsGlobal.NORM)) {
+            if(dataDTO.getTypeData().equals(ConstantsGlobal.NAME_STOCKS_UGK)) {
                 entries.add(new Entry(dataDTO.getNumberDay(), (float)dataDTO.getValye()));
             }
 
-        LineDataSet set = new LineDataSet(entries, getString(R.string.norm_name));
-        set.setColor(Color.BLUE);
+        LineDataSet set = new LineDataSet(entries, getString(R.string.name_stocks_ugk));
+        set.setColor(Color.RED);
         set.setLineWidth(getResources().getDimension(R.dimen.graph_lineWidth));
-        set.setCircleColor(Color.BLUE);
+        set.setCircleColor(Color.RED);
         set.setCircleRadius(getResources().getDimension(R.dimen.graph_lineCircleRadius));
-        set.setFillColor(Color.BLUE);
+        set.setFillColor(Color.RED);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setDrawValues(true);
         set.setValueTextSize(getResources().getDimension(R.dimen.dot_valueTextSize));
-        set.setValueTextColor(Color.BLUE);
+        set.setValueTextColor(Color.RED);
 
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
 
         return set;
     }
 
-    private LineDataSet generateLineData12Q() {
+    private LineDataSet generateLineDataPlaneStocks() {
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
-        entries.add(new Entry(0, (float)plane_12Q));
+        entries.add(new Entry(0, (float)plane_stocks));
         for (DataDTO dataDTO: dataDTOs) {
-            if (dataDTO.getTypeData().equals(ConstantsGlobal.PLANE_12Q)) {
+            if (dataDTO.getTypeData().equals(ConstantsGlobal.NAME_PLANE_STOCKS)) {
                 entries.add(new Entry(dataDTO.getNumberDay()+ getResources().getDimension(R.dimen.addisize_to_graph), (float)dataDTO.getValye()));
             }
         }
 
 
-        LineDataSet set = new LineDataSet(entries, getString(R.string.plane_12q_name));
-        set.setColor(color_plane_12Q);
+        LineDataSet set = new LineDataSet(entries, getString(R.string.name_plane_stocks));
+        set.setColor(getResources().getColor(R.color.color_graph_pink));
         set.setDrawValues(false);
         set.setDrawCircles(false);
         set.setLineWidth(getResources().getDimension(R.dimen.graph_minlineWidth));
         set.setDrawFilled(true);
-        set.setFillColor(color_plane_12Q);
+        set.setFillColor(getResources().getColor(R.color.color_graph_pink));
         set.setFillAlpha(100);
 
         return set;
@@ -258,7 +262,7 @@ public class StocksFragmentGraph extends Fragment{
         ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
 
         for (DataDTO dataDTO: dataDTOs)
-            if(dataDTO.getTypeData().equals(ConstantsGlobal.FACT)) {
+            if(dataDTO.getTypeData().equals(ConstantsGlobal.NAME_12ZF)) {
                 //entries1.add(new BarEntry(dataDTO.getNumberDay(), (float)dataDTO.getValye()));
                 entries.add(new BarEntry(dataDTO.getNumberDay(), new float[]{(float)dataDTO.getValye(), (float)dataDTO.getValye()}));
             }

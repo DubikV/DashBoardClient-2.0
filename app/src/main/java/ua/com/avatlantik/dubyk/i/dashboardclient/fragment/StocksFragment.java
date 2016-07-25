@@ -40,7 +40,7 @@ public class StocksFragment extends Fragment{
 
         dataStoreDTO = DataStoreDTO.getInstance();
 
-        dataTableDTOs = dataStoreDTO.getSalesUGKTableDTO();
+        dataTableDTOs = dataStoreDTO.getStoksTableDTO();
 
         if (dataTableDTOs == null){
             Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
