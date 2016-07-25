@@ -2,9 +2,6 @@ package ua.com.avatlantik.dubyk.i.dashboardclient.Constants;
 
 public class ConstantsGlobal {
 
-    public static final int ITEM_SALES_UGK = 1;
-    public static final int ITEM_MONEY = 2;
-
     public static final int MAX_TIME =2000;
     public static final int HALF_TIME =1000;
     public static final int SMALL_TIME =500;
@@ -36,5 +33,6 @@ public class ConstantsGlobal {
     public static final String SALES_GET_NAME = "salesUGK";
     public static final String SALESMONEY_GET_NAME = "salesMoney";
     public static final String STOCKS_GET_NAME = "stocksGet";
+    public static final String MARGIN_GET_NAME = "margin";
 
 }

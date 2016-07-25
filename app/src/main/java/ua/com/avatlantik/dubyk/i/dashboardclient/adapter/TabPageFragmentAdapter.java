@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import ua.com.avatlantik.dubyk.i.dashboardclient.Constants.ConstantsGlobal;
+import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.MarginFragment;
+import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.MarginFragmentGraph;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.MoneyFragment;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.MoneyFragmentGraph;
 import ua.com.avatlantik.dubyk.i.dashboardclient.fragment.SalesUgkFragment;
@@ -45,6 +47,8 @@ public class TabPageFragmentAdapter extends FragmentPagerAdapter {
                     return MoneyFragmentGraph.getInstance();
                 }else if(nameData.equals(ConstantsGlobal.STOCKS_GET_NAME)){
                     return StocksFragmentGraph.getInstance();
+                }else if(nameData.equals(ConstantsGlobal.MARGIN_GET_NAME)){
+                    return MarginFragmentGraph.getInstance();
                 }else {
                     return SalesUgkFragmentGraph.getInstance();
                 }
@@ -55,6 +59,8 @@ public class TabPageFragmentAdapter extends FragmentPagerAdapter {
                     return MoneyFragment.getInstance();
                 }else if(nameData.equals(ConstantsGlobal.STOCKS_GET_NAME)){
                     return StocksFragment.getInstance();
+                }else if(nameData.equals(ConstantsGlobal.MARGIN_GET_NAME)){
+                    return MarginFragment.getInstance();
                 }else {
                     return SalesUgkFragmentGraph.getInstance();
                 }

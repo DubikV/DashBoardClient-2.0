@@ -25,7 +25,9 @@ public class DataStoreDTO {
     private ArrayList<DataTableDTO> stoksTableDTO;
     private DataAddDTO stoksAddDTO;
 
-    private ArrayList<AdditionalInfoDTO> additionalInfoDTO;
+    private ArrayList<DataDTO> marginDTO;
+    private ArrayList<DataTableDTO> marginTableDTO;
+    private DataAddDTO marginAddDTO;
 
     private static volatile DataStoreDTO _instance = null;
 
@@ -65,14 +67,6 @@ public class DataStoreDTO {
 
     public void setSalesUGKTableDTO(ArrayList<DataTableDTO> salesUGKTableDTO) {
         this.salesUGKTableDTO = salesUGKTableDTO;
-    }
-
-    public ArrayList<AdditionalInfoDTO> getAdditionalInfoDTO() {
-        return additionalInfoDTO;
-    }
-
-    public void setAdditionalInfoDTO(ArrayList<AdditionalInfoDTO> additionalInfoDTO) {
-        this.additionalInfoDTO = additionalInfoDTO;
     }
 
     public ArrayList<DataTableDTO> getMoneyTableDTO() {
@@ -129,5 +123,29 @@ public class DataStoreDTO {
 
     public void setStoksDTO(ArrayList<DataDTO> stoksDTO) {
         this.stoksDTO = stoksDTO;
+    }
+
+    public ArrayList<DataDTO> getMarginDTO() {
+        return marginDTO;
+    }
+
+    public void setMarginDTO(ArrayList<DataDTO> marginDTO) {
+        this.marginDTO = marginDTO;
+    }
+
+    public ArrayList<DataTableDTO> getMarginTableDTO() {
+        return marginTableDTO;
+    }
+
+    public void setMarginTableDTO(ArrayList<DataTableDTO> marginTableDTO) {
+        this.marginTableDTO = marginTableDTO;
+    }
+
+    public DataAddDTO getMarginAddDTO() {
+        return marginAddDTO;
+    }
+
+    public void setMarginAddDTO(DataAddDTO marginAddDTO) {
+        this.marginAddDTO = marginAddDTO;
     }
 }

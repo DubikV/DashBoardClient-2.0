@@ -18,16 +18,16 @@ import ua.com.avatlantik.dubyk.i.dashboardclient.dto.DataStoreDTO;
 /**
  * Created by i.dubyk on 24.06.2016.
  */
-public class StocksFragment extends Fragment{
+public class MarginFragment extends Fragment{
     private static  final int LAYOUT = R.layout.fragment_stocks;
     private View view;
     private DataStoreDTO dataStoreDTO;
     private ArrayList<DataTableDTO> dataTableDTOs;
 
-    public static StocksFragment getInstance() {
+    public static MarginFragment getInstance() {
 
         Bundle args = new Bundle();
-        StocksFragment fragment = new StocksFragment();
+        MarginFragment fragment = new MarginFragment();
         fragment.setArguments(args);
         return  fragment;
     }
@@ -39,7 +39,7 @@ public class StocksFragment extends Fragment{
 
         dataStoreDTO = DataStoreDTO.getInstance();
 
-        dataTableDTOs = dataStoreDTO.getStoksTableDTO();
+        dataTableDTOs = dataStoreDTO.getMarginTableDTO();
 
         if (dataTableDTOs == null){
             //Toast.makeText(getActivity(),getString(R.string.error_no_data),Toast.LENGTH_SHORT).show();
